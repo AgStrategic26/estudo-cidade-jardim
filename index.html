@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Cidade Jardim em Números</title>
+<title>On Resort em Números</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Estudo de rentabilidade de um studio no Cidade Jardim (Barra Olímpica) em locação por temporada, com calendário de eventos e simulador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,6 +146,31 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .bar .track i{display:block;height:100%;width:0;border-radius:8px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
 .bar b{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
 @media (max-width:560px){.bar{grid-template-columns:1fr auto}.bar .track{grid-column:1/-1;order:3}}
+.prod{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px}
+@media (max-width:760px){.prod{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.prod div{background:var(--surface2);border-radius:14px;padding:16px;min-width:0}
+.prod b{display:block;font-family:var(--display);font-size:30px;font-weight:700;color:var(--gold);line-height:1.1}
+.prod span{display:block;font-size:15px;color:var(--muted);margin-top:6px;line-height:1.4}
+.dates{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:24px}
+@media (max-width:860px){.dates{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.dates{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.date{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.date.peak{background:var(--band);border-color:var(--band);color:var(--band-fg)}
+.date small{font-size:14px;color:var(--muted)}
+.date.peak small{color:var(--band-fg);opacity:.75}
+.date h3{font-size:18px}
+.date .p{font-family:var(--display);font-size:34px;font-weight:700;color:var(--gold);line-height:1.05;font-variant-numeric:tabular-nums}
+.date.peak .p{color:var(--gold-hi)}
+.date .r{font-size:14px;opacity:.85;font-variant-numeric:tabular-nums}
+.date a{margin-top:auto;font-size:15px;font-weight:600;color:var(--green);text-decoration:none;padding-top:6px}
+.date.peak a{color:var(--gold-hi)}
+.date a:hover{text-decoration:underline}
+.rir{background:var(--band);color:var(--band-fg);border-color:var(--band)}
+.rir .eyebrow{color:var(--gold-hi)}
+.rir h3{color:#fff;font-family:var(--display);font-size:26px}
+.rir .note{color:var(--band-fg);opacity:.75}
+.rirnum{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin:18px 0 8px}
+.rirnum b{font-family:var(--display);font-size:clamp(36px,5vw,48px);font-weight:700;color:var(--gold-hi);line-height:1}
 .refreal{display:grid;gap:4px;margin-top:22px;padding:16px 20px;border-left:4px solid var(--gold);background:var(--surface);border-radius:0 14px 14px 0;font-size:17px}
 .refreal b{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
 .nights{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
@@ -174,14 +199,14 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <canvas id="pulse" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="eyebrow">Estudo de rentabilidade · outubro 2026</div>
-    <h1>Cidade Jardim</h1>
-    <p class="sub">Barra Olímpica, Rio de Janeiro. Um studio no meio do eixo de eventos da Zona Oeste, alugado por temporada.</p>
+    <h1>On Resort</h1>
+    <p class="sub">Cidade Jardim, Barra Olímpica. Um studio no meio do eixo de eventos da Zona Oeste, feito para alugar por temporada.</p>
     <div class="price">Studio a partir de <b>R$ 365 mil</b></div>
     <div class="kpis">
-      <div class="kpi main"><b class="count" data-to="3663" data-pre="R$ " data-thou="1">R$ 3.663</b><span>líquido por mês com gestora profissional (cenário Base)</span></div>
-      <div class="kpi"><b class="count" data-to="6593" data-pre="R$ " data-thou="1">R$ 6.593</b><span>receita bruta média por mês</span></div>
-      <div class="kpi"><b class="count" data-to="10.6" data-dec="1" data-suf="% a.a.">10,6% a.a.</b><span>retorno líquido sobre o investimento total</span></div>
-      <div class="kpi"><b class="count" data-to="4982" data-pre="R$ " data-thou="1">R$ 4.982</b><span>líquido por mês em autogestão</span></div>
+      <div class="kpi main"><b class="count" data-to="3528" data-pre="R$ " data-thou="1">R$ 3.528</b><span>líquido por mês com gestora profissional (cenário Base)</span></div>
+      <div class="kpi"><b class="count" data-to="6409" data-pre="R$ " data-thou="1">R$ 6.409</b><span>receita bruta média por mês</span></div>
+      <div class="kpi"><b class="count" data-to="10.2" data-dec="1" data-suf="% a.a.">10,2% a.a.</b><span>retorno líquido sobre o investimento total</span></div>
+      <div class="kpi"><b class="count" data-to="4810" data-pre="R$ " data-thou="1">R$ 4.810</b><span>líquido por mês em autogestão</span></div>
       <div class="kpi"><b class="count" data-to="1.9" data-dec="1" data-suf="x">1,9x</b><span>o que renderia no aluguel tradicional</span></div>
       <div class="kpi"><b class="count" data-to="5128" data-pre="R$ " data-thou="1">R$ 5.128</b><span>líquido por mês com diária de R$ 430 e 20 noites alugadas</span></div>
     </div>
@@ -189,10 +214,33 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 </header>
 
 <main>
+<section id="airbnb"><div class="wrap">
+  <div class="eyebrow">Diárias reais no Airbnb</div>
+  <h2>Quanto custa um studio na região em cada data</h2>
+  <p class="lead">Preços reais de studios e apartamentos de 1 quarto inteiros na Barra Olímpica, coletados no Airbnb em 28 de outubro de 2026, para 2 hóspedes. O valor é o total pago pelo hóspede, já com limpeza e taxas, dividido pelas noites.</p>
+  <div class="dates" id="dates"></div>
+  <div class="grid2">
+    <div class="card reveal"><h3>Faixa de preço por noite, data a data</h3>
+      <div class="chart tall"><canvas id="cReal" role="img" aria-label="Diária mediana no Airbnb: dia útil 250, fim de semana 269, verão 310, Carnaval 571, Réveillon 737 reais"></canvas></div>
+      <p class="note">Barra: do menor ao maior preço encontrado. Ponto: mediana dos anúncios. Losango: diária usada neste estudo.</p></div>
+    <div class="card rir reveal"><div class="eyebrow">Rock in Rio</div><h3>Na semana do festival, a Barra lota</h3>
+      <div class="rirnum"><b>R$ 1.300</b><span>a</span><b>R$ 4.100</b></div>
+      <p>por noite nos hotéis da Barra durante o Rock in Rio 2026. Um quarto duplo na região girava em torno de R$ 2.500.</p>
+      <p class="note">Fonte: Dicas de Viagem, agosto de 2026. O estudo usa só R$ 832 por noite para o studio no festival, menos de um terço do quarto de hotel.</p>
+      <p class="note">Para eventos de 2027 mais distantes, como LAAD e Bienal, os anúncios ainda mostram preço de dia comum. Os anfitriões sobem as diárias perto da data.</p></div>
+  </div>
+</div></section>
+
 <section><div class="wrap">
   <div class="eyebrow">Onde fica</div>
   <h2>No meio do eixo de eventos da Zona Oeste</h2>
-  <p class="lead">O Cidade Jardim é o bairro planejado da Carvalho Hosken, cercado pelo Cinturão Verde. A poucos minutos estão a Cidade do Rock, o Riocentro, a Farmasi Arena e a Cidade das Artes. São os maiores geradores de demanda de hospedagem da região.</p>
+  <p class="lead">O On Resort fica dentro do Cidade Jardim, o bairro planejado da Carvalho Hosken, cercado pelo Cinturão Verde. A poucos minutos estão a Cidade do Rock, o Riocentro, a Farmasi Arena e a Cidade das Artes. São os maiores geradores de demanda de hospedagem da região.</p>
+  <div class="prod reveal">
+    <div><b>1.306</b><span>unidades em 3 blocos, da RJZ Cyrela</span></div>
+    <div><b>32 m²</b><span>studios do bloco Polinésia</span></div>
+    <div><b>Airbnb</b><span>projeto pensado para temporada, com parceria com o Airbnb</span></div>
+    <div><b>Charlie</b><span>gestão de locação, concierge, shuttle e serviços pay per use</span></div>
+  </div>
   <div class="card reveal">
     <h3>Público por evento</h3>
     <p class="note" style="margin-top:0">Pessoas por edição. Farmasi Arena: capacidade máxima de um show.</p>
@@ -247,8 +295,8 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 
 <section><div class="wrap">
   <div class="eyebrow">Sazonalidade</div>
-  <h2>Os eventos fazem quase metade da receita</h2>
-  <p class="lead" id="sazLead">No cenário Base, as noites de evento e alta temporada geram cerca de 45% da receita bruta do ano. Setembro rivaliza com o verão.</p>
+  <h2>Eventos e alta temporada fazem mais da metade da receita</h2>
+  <p class="lead" id="sazLead">No cenário Base, as noites de evento e alta temporada geram cerca de 56% da receita bruta do ano. Setembro rivaliza com o verão.</p>
   <div class="card reveal"><h3>Receita bruta por mês, studio de 32 m²</h3>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
       <div class="seg" id="segMes" role="group" aria-label="Cenário">
@@ -271,7 +319,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <h2>Quanto rende com 10, 20 ou 30 noites no mês</h2>
   <p class="lead">Escolha a diária média e veja quanto o studio rende com 10, 15, 20, 25 ou 30 noites alugadas no mês. Com o calendário de eventos da Barra, o cenário Base fica perto de 20 noites.</p>
   <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px">
-    <div class="seg" id="segDiaria" role="group" aria-label="Diária média"><button type="button" aria-pressed="false" data-v="336">R$ 336 · média do estudo</button><button type="button" aria-pressed="true" data-v="430">R$ 430</button><button type="button" aria-pressed="false" data-v="470">R$ 470</button></div>
+    <div class="seg" id="segDiaria" role="group" aria-label="Diária média"><button type="button" aria-pressed="false" data-v="327">R$ 327 · média do estudo</button><button type="button" aria-pressed="true" data-v="430">R$ 430</button><button type="button" aria-pressed="false" data-v="470">R$ 470</button></div>
     <div class="seg" id="segGestN" role="group" aria-label="Gestão"><button type="button" aria-pressed="true" data-v="0.20">Gestora (20%)</button><button type="button" aria-pressed="false" data-v="0">Autogestão</button></div>
   </div>
   <div class="refreal"><b>Referência real, outubro de 2026</b><span>Flat Union Suites, num dia comum sem evento: 4 noites por R$ 1.790 com taxas, cerca de R$ 430 a R$ 450 por noite. E numa localização menos estratégica que o Cidade Jardim.</span></div>
@@ -299,15 +347,15 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
         <div class="seg" id="segRir" role="group" aria-label="Tipo de ano"><button type="button" aria-pressed="true" data-v="media">Média</button><button type="button" aria-pressed="false" data-v="par">Par (Rock in Rio)</button><button type="button" aria-pressed="false" data-v="impar">Ímpar (Bienal)</button></div></div>
     </div>
     <div class="out" aria-live="polite">
-      <div><div style="font-size:16px;opacity:.82">Líquido por mês, antes do IR</div><div class="big" id="rMes">R$ 3.663</div></div>
+      <div><div style="font-size:16px;opacity:.82">Líquido por mês, antes do IR</div><div class="big" id="rMes">R$ 3.528</div></div>
       <div class="meter" aria-hidden="true"><i id="rBar"></i><em id="rRef"></em></div>
       <div class="mcap"><span>R$ 0</span><span>linha branca: aluguel tradicional</span><span>R$ 8 mil</span></div>
-      <div class="row"><span>Receita bruta por mês</span><b id="rBruto">R$ 6.593</b></div>
-      <div class="row"><span>Retorno ao ano</span><b id="rYield">10,6%</b></div>
+      <div class="row"><span>Receita bruta por mês</span><b id="rBruto">R$ 6.409</b></div>
+      <div class="row"><span>Retorno ao ano</span><b id="rYield">10,2%</b></div>
       <div class="row"><span>Investimento total</span><b id="rInv">R$ 413.870</b></div>
-      <div class="row"><span>Retorno do capital só com a renda</span><b id="rPay">9,4 anos</b></div>
+      <div class="row"><span>Retorno do capital só com a renda</span><b id="rPay">9,8 anos</b></div>
       <div class="row"><span>Ocupação média do ano</span><b id="rOcc">64,5%</b></div>
-      <div class="row"><span>Diária média do ano</span><b id="rAdrM">R$ 336</b></div>
+      <div class="row"><span>Diária média do ano</span><b id="rAdrM">R$ 327</b></div>
       <div class="row"><span>Comparado ao aluguel tradicional</span><b id="rX">1,9x</b></div>
     </div>
   </div>
@@ -324,7 +372,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   </div>
   <div class="grid2">
     <div class="card reveal"><h3>Da receita ao líquido (Base, por ano)</h3>
-      <div class="chart tall"><canvas id="cCasc" role="img" aria-label="Receita de 79.118 reais menos gestão, plataforma, manutenção, condomínio e IPTU e contas resulta em líquido de 43.956 reais por ano"></canvas></div></div>
+      <div class="chart tall"><canvas id="cCasc" role="img" aria-label="Receita de 76.904 reais menos gestão, plataforma, manutenção, condomínio e IPTU e contas resulta em líquido de 42.340 reais por ano"></canvas></div></div>
     <div class="card reveal"><h3>Renda acumulada em 10 anos</h3>
       <div class="chart tall"><canvas id="cAcum" role="img" aria-label="Renda líquida acumulada em 10 anos nos três cenários, comparada ao investimento total"></canvas></div>
       <p class="note">Sem reajuste das diárias e sem contar a valorização do imóvel. A linha tracejada é o investimento total.</p></div>
@@ -340,14 +388,14 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
       <tbody>
         <tr><td>Diária em dias comuns</td><td class="n">R$ 220</td><td class="n">R$ 260</td><td class="n">R$ 300</td></tr>
         <tr><td>Ocupação em dias comuns</td><td class="n">48%</td><td class="n">55%</td><td class="n">62%</td></tr>
-        <tr><td>Diária média no ano, com eventos</td><td class="n">R$ 276</td><td class="n">R$ 336</td><td class="n">R$ 392</td></tr>
+        <tr><td>Diária média no ano, com eventos</td><td class="n">R$ 269</td><td class="n">R$ 327</td><td class="n">R$ 381</td></tr>
         <tr><td>Ocupação média no ano</td><td class="n">57,1%</td><td class="n">64,5%</td><td class="n">70,1%</td></tr>
-        <tr><td>Receita bruta por mês</td><td class="n">R$ 4.799</td><td class="n">R$ 6.593</td><td class="n">R$ 8.350</td></tr>
-        <tr><td><b>Líquido por mês</b></td><td class="n">R$ 2.353</td><td class="n">R$ 3.663</td><td class="n">R$ 4.946</td></tr>
-        <tr><td><b>Retorno ao ano</b></td><td class="n">6,8%</td><td class="n">10,6%</td><td class="n">14,3%</td></tr>
+        <tr><td>Receita bruta por mês</td><td class="n">R$ 4.679</td><td class="n">R$ 6.409</td><td class="n">R$ 8.108</td></tr>
+        <tr><td><b>Líquido por mês</b></td><td class="n">R$ 2.266</td><td class="n">R$ 3.528</td><td class="n">R$ 4.769</td></tr>
+        <tr><td><b>Retorno ao ano</b></td><td class="n">6,6%</td><td class="n">10,2%</td><td class="n">13,8%</td></tr>
       </tbody>
     </table></div>
-    <p class="note">Referência de mercado: a diária mediana do Airbnb na Barra da Tijuca é de R$ 382, e os 25% melhores anúncios têm ocupação de 73% (GuestFavorites, jan a set de 2026). O studio fica abaixo dessa mediana porque a média mistura imóveis maiores.</p>
+    <p class="note">As diárias do estudo batem com os preços reais do Airbnb na Barra Olímpica coletados em 28/10/2026 (veja a seção de diárias reais). Os 25% melhores anúncios da Barra da Tijuca têm ocupação de 73% (GuestFavorites, jan a set de 2026).</p>
   </div>
   <div class="grid2">
     <div class="card reveal"><h3>Custos considerados</h3>
@@ -362,7 +410,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
       <ul class="list">
         <li><span>Confirmar na convenção do condomínio que a locação por temporada é permitida.</span></li>
         <li><span>Há vários lançamentos de studios na Barra Olímpica, o que aumenta a concorrência.</span></li>
-        <li><span>Quase metade da receita vem dos picos; meses fracos pedem preço dinâmico.</span></li>
+        <li><span>Mais da metade da receita vem dos picos; meses fracos pedem preço dinâmico.</span></li>
         <li><span>Valores antes do Imposto de Renda. Projeção, não garantia de rentabilidade.</span></li>
       </ul></div>
   </div>
@@ -371,7 +419,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 
 <footer><div class="wrap">
   <b style="color:var(--fg)">Strategic Marketing · fontes</b>
-  <p style="margin-top:6px">Projeção para o studio de 32 m² entregue, mobiliado e em operação. Preço de tabela informado: a partir de R$ 365 mil.</p>
+  <p style="margin-top:6px">On Resort Cidade Jardim (RJZ Cyrela), Av. Vice-Presidente José Alencar, 1.305, Barra Olímpica. Projeção para o studio de 32 m² entregue, mobiliado e em operação. Preço de tabela informado: a partir de R$ 365 mil.</p>
   <ul>
     <li>GuestFavorites: Airbnb na Barra da Tijuca, 2026</li>
     <li>HostnJoy: receita e custos de gestão no Rio, 2026</li>
@@ -385,6 +433,8 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
     <li>HotéisRIO e Embratur via Diário do Rio</li>
     <li>Farmasi Arena: capacidade e histórico</li>
     <li>LAAD Defence &amp; Security 2027</li>
+    <li>Airbnb: anúncios da Barra Olímpica, coleta em 28/10/2026</li>
+    <li>Dicas de Viagem: hotéis na Barra no Rock in Rio 2026</li>
   </ul>
 </div></footer>
 
@@ -396,9 +446,9 @@ const MESES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov"
 const MESES_L = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 // noites por mês, ocupação, multiplicador sobre a diária comum
 const BLOCOS = [
-  { nome:"Réveillon",              n:[2,0,0,0,0,0,0,0,0,0,0,4],  o:.95, m:3.0 },
-  { nome:"Carnaval",               n:[0,6,0,0,0,0,0,0,0,0,0,0],  o:.95, m:2.6 },
-  { nome:"Alta temporada de verão",n:[22,14,0,0,0,0,0,0,0,0,0,10], o:.78, m:1.35 },
+  { nome:"Réveillon",              n:[2,0,0,0,0,0,0,0,0,0,0,4],  o:.95, m:2.85 },
+  { nome:"Carnaval",               n:[0,6,0,0,0,0,0,0,0,0,0,0],  o:.95, m:2.2 },
+  { nome:"Alta temporada de verão",n:[22,14,0,0,0,0,0,0,0,0,0,10], o:.78, m:1.2 },
   { nome:"Férias de julho",        n:[0,0,0,0,0,0,14,0,0,0,0,0], o:.72, m:1.15 },
   { nome:"Web Summit Rio",         n:[0,0,0,0,0,5,0,0,0,0,0,0],  o:.90, m:1.8 },
   { nome:"Rio2C",                  n:[0,0,0,0,6,0,0,0,0,0,0,0],  o:.80, m:1.35 },
@@ -546,6 +596,12 @@ function renderCal(animate) {
   });
   box.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => { eventoSel = b.dataset.id; renderCal(false); renderDetail(); }));
 }
+const REALEV = {
+  reveillon: "No Airbnb hoje: R$ 737 por noite (mediana dos studios da Barra Olímpica).",
+  carnaval: "No Airbnb hoje: R$ 571 por noite para o Carnaval 2027.",
+  verao: "No Airbnb hoje: R$ 310 por noite em janeiro, num dia de semana.",
+  rir: "Hotéis da Barra no Rock in Rio 2026: de R$ 1.300 a R$ 4.100 por noite.",
+};
 function renderDetail() {
   const e = EVENTOS.find(x => x.id === eventoSel);
   const b = BLOCOS.find(x => x.nome === e.bloco);
@@ -554,7 +610,7 @@ function renderDetail() {
   $("detail").innerHTML = `<div>
       <div class="eyebrow" style="margin-bottom:6px">${anoTxt} · ${e.meses.map(i => MESES[i]).join(", ")}</div>
       <h3>${e.nome}</h3><div class="where">${e.local}</div>
-      <p style="margin-top:12px">${e.dado}</p>
+      <p style="margin-top:12px">${e.dado}</p>${REALEV[e.id] ? `<p style="margin-top:10px;color:var(--gold-hi);font-weight:500">${REALEV[e.id]}</p>` : ""}
     </div>
     <dl>
       <div><dt>Quando</dt><dd>${e.quando}</dd></div>
@@ -610,6 +666,17 @@ function build() {
   narrow = innerWidth < 640;
   const T = theme(); base(T);
   const grid = { color: T.line }, noGrid = { display: false };
+
+
+  charts.push(new Chart($("cReal"), {
+    data: { labels: REAL.map(d => d.nome), datasets: [
+      { type: "bar", label: "Faixa de preço", data: REAL.map(d => [d.min, d.max]), backgroundColor: REAL.map(d => d.peak ? T.gold + "55" : T.soft + "88"), borderRadius: 6, barThickness: narrow ? 26 : 38, order: 3 },
+      { type: "scatter", label: "Mediana", data: REAL.map((d, i) => ({ x: d.nome, y: d.med })), backgroundColor: T.fg, pointRadius: 6, order: 1 },
+      { type: "scatter", label: "Diária do estudo", data: REAL.map(d => ({ x: d.nome, y: d.est })), backgroundColor: T.gold, pointStyle: "rectRot", pointRadius: 8, order: 2 } ] },
+    options: { maintainAspectRatio: false, plugins: { legend: { position: "bottom" },
+      tooltip: { callbacks: { label: c => c.dataset.type === "bar" ? `De ${brl(c.raw[0])} a ${brl(c.raw[1])}` : `${c.dataset.label}: ${brl(c.raw.y)}` } } },
+      scales: { x: { type: "category", grid: { display: false }, ticks: { color: T.fg, maxRotation: 0, font: { size: narrow ? 11 : 14 } } },
+        y: { min: 0, max: 1200, grid, ticks: { callback: v => "R$ " + fmt(v) } } } } }));
 
   charts.push(new Chart($("cPublico"), {
     type: "bar",
@@ -710,6 +777,20 @@ function renderCompare(animate) {
 }
 
 
+
+/* ===== diárias reais do Airbnb (coleta 28/10/2026) ===== */
+const AB = "https://www.airbnb.com.br/s/Barra-Ol%C3%ADmpica--Rio-de-Janeiro/homes?adults=2&room_types%5B%5D=Entire%20home%2Fapt&min_bedrooms=1&max_bedrooms=1";
+const REAL = [
+  { nome:"Dia útil", quando:"10 a 12 nov 2026", ci:"2026-11-10", co:"2026-11-12", min:160, med:250, max:389, est:260 },
+  { nome:"Fim de semana", quando:"13 a 15 nov 2026", ci:"2026-11-13", co:"2026-11-15", min:188, med:269, max:362, est:260 },
+  { nome:"Verão", quando:"19 a 22 jan 2027", ci:"2027-01-19", co:"2027-01-22", min:200, med:310, max:431, est:312 },
+  { nome:"Carnaval", quando:"5 a 10 fev 2027", ci:"2027-02-05", co:"2027-02-10", min:300, med:571, max:734, est:572, peak:1 },
+  { nome:"Réveillon", quando:"29 dez a 2 jan", ci:"2026-12-29", co:"2027-01-02", min:573, med:737, max:1059, est:741, peak:1 },
+];
+$("dates").innerHTML = REAL.map(d => `<div class="date${d.peak ? " peak" : ""}"><small>${d.quando}</small><h3>${d.nome}</h3>
+  <div class="p">${brl(d.med)}</div><div class="r">por noite · de ${brl(d.min)} a ${brl(d.max)}</div>
+  <a href="${AB}&checkin=${d.ci}&checkout=${d.co}" target="_blank" rel="noopener">Ver no Airbnb agora →</a></div>`).join("");
+
 /* ===== noites alugadas ===== */
 let adrN = 430, gN = .20;
 const NIVEIS = [10, 15, 20, 25, 30];
@@ -734,9 +815,9 @@ function renderNights(animate) {
 segBind("segDiaria", v => { adrN = +v; renderNights(true); });
 segBind("segGestN", v => { gN = +v; renderNights(true); });
 function renderTabela() {
-  const diarias = [336, 380, 430, 470];
+  const diarias = [327, 380, 430, 470];
   $("tUnid").innerHTML = `<thead><tr><th>Diária média</th>${NIVEIS.map(n => `<th>${n} noites</th>`).join("")}</tr></thead><tbody>${diarias.map(d => `<tr${d === adrN ? ' style="background:var(--surface2)"' : ""}><td><b>${brl(d)}</b></td>${NIVEIS.map(n => `<td class="n">${brl(liqN(n, d, gN))}</td>`).join("")}</tr>`).join("")}</tbody>`;
-  $("tUnidNote").textContent = `${gN ? "Com gestora de 20%." : "Em autogestão."} Referência de mercado: a diária mediana do Airbnb na Barra da Tijuca é de R$ 382, considerando imóveis de todos os tamanhos (GuestFavorites, 2026). Diárias de R$ 430 a R$ 470 já são praticadas por flats da região em dias comuns, e pedem um studio bem decorado, bem avaliado e com preço alto nas datas de evento.`;
+  $("tUnidNote").textContent = `${gN ? "Com gestora de 20%." : "Em autogestão."} Diárias médias de R$ 430 a R$ 470 no ano pedem um studio acima da média da região, bem avaliado e com preço alto nas datas de evento.`;
 }
 /* ===== simulador ===== */
 let gest = .20, anoSim = "media", uSim = UNID.studio;
