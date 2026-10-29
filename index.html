@@ -671,11 +671,11 @@ function build() {
   charts.push(new Chart($("cReal"), {
     data: { labels: REAL.map(d => d.nome), datasets: [
       { type: "bar", label: "Faixa de preço", data: REAL.map(d => [d.min, d.max]), backgroundColor: REAL.map(d => d.peak ? T.gold + "55" : T.soft + "88"), borderRadius: 6, barThickness: narrow ? 26 : 38, order: 3 },
-      { type: "scatter", label: "Mediana", data: REAL.map((d, i) => ({ x: d.nome, y: d.med })), backgroundColor: T.fg, pointRadius: 6, order: 1 },
-      { type: "scatter", label: "Diária do estudo", data: REAL.map(d => ({ x: d.nome, y: d.est })), backgroundColor: T.gold, pointStyle: "rectRot", pointRadius: 8, order: 2 } ] },
+      { type: "scatter", label: "Mediana", data: REAL.map((d, i) => ({ x: d.nome, y: d.med })), backgroundColor: T.fg, pointRadius: 4, order: 2 },
+      { type: "scatter", label: "Diária do estudo", data: REAL.map(d => ({ x: d.nome, y: d.est })), backgroundColor: T.gold, pointStyle: "rectRot", pointRadius: 9, order: 1 } ] },
     options: { maintainAspectRatio: false, plugins: { legend: { position: "bottom" },
       tooltip: { callbacks: { label: c => c.dataset.type === "bar" ? `De ${brl(c.raw[0])} a ${brl(c.raw[1])}` : `${c.dataset.label}: ${brl(c.raw.y)}` } } },
-      scales: { x: { type: "category", grid: { display: false }, ticks: { color: T.fg, maxRotation: 0, font: { size: narrow ? 11 : 14 } } },
+      scales: { x: { type: "category", grid: { display: false }, ticks: { color: T.fg, maxRotation: 0, autoSkip: false, font: { size: narrow ? 10 : 13 } } },
         y: { min: 0, max: 1200, grid, ticks: { callback: v => "R$ " + fmt(v) } } } } }));
 
   charts.push(new Chart($("cPublico"), {
