@@ -1,103 +1,189 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Cidade Jardim em Números</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Estudo de rentabilidade de um studio no Cidade Jardim (Barra Olímpica) em locação por temporada, com calendário de eventos e simulador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Poppins:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Poppins:wght@400;500;600&display=swap">
 <style>
-/* Layout: coluna única editorial, seções alternando chão claro e faixas verdes; gráficos em cartões largos */
+/* Layout: coluna editorial única; faixas verdes (hero, calendário, simulador) alternam com chão claro; gráficos em cartões largos */
 :root{
-  --bg:#F2F4EF; --surface:#FFFFFF; --band:#1C3528; --band-fg:#EEF3EE; --fg:#17271F; --muted:#5E6B63;
-  --line:#DCE2DA; --gold:#C48A1F; --green:#2F8A5A; --purple:#7D5BC0; --soft:#9DB5A3; --cost:#C9785B;
-  --display:"Bricolage Grotesque", "Poppins", system-ui, sans-serif;
-  --body:"Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg:#F2F4EF; --surface:#FFFFFF; --surface2:#E8EDE6; --band:#1C3528; --band2:#24402F; --band-fg:#EEF3EE;
+  --fg:#17271F; --muted:#56635B; --line:#D7DED5;
+  --gold:#B57E16; --gold-hi:#D9A94A; --green:#2F8A5A; --purple:#7D5BC0; --soft:#9DB5A3; --cost:#C2694A;
+  --display:"Bricolage Grotesque","Poppins",system-ui,sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1A14; --surface:#16251C; --band:#0B140F; --band-fg:#E3ECE5; --fg:#E7EEE9; --muted:#9DAAA1;
-  --line:#26382D; --gold:#C08A20; --green:#3A9866; --purple:#8F72D6; --soft:#5E7D68; --cost:#C9785B; color-scheme:dark}}
+  --bg:#0F1A14; --surface:#16251C; --surface2:#1B2D22; --band:#0B140F; --band2:#132219; --band-fg:#E3ECE5;
+  --fg:#E7EEE9; --muted:#9DAAA1; --line:#26382D;
+  --gold:#D9A94A; --gold-hi:#E2B65C; --green:#3FA36E; --purple:#9A80DE; --soft:#5E7D68; --cost:#D67C5C; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1A14; --surface:#16251C; --band:#0B140F; --band-fg:#E3ECE5; --fg:#E7EEE9; --muted:#9DAAA1;
-  --line:#26382D; --gold:#C08A20; --green:#3A9866; --purple:#8F72D6; --soft:#5E7D68; --cost:#C9785B; color-scheme:dark}
+  --bg:#0F1A14; --surface:#16251C; --surface2:#1B2D22; --band:#0B140F; --band2:#132219; --band-fg:#E3ECE5;
+  --fg:#E7EEE9; --muted:#9DAAA1; --line:#26382D;
+  --gold:#D9A94A; --gold-hi:#E2B65C; --green:#3FA36E; --purple:#9A80DE; --soft:#5E7D68; --cost:#D67C5C; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-section{padding-block:56px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
-h2{font-size:clamp(28px,4.4vw,42px);font-weight:700;letter-spacing:-.01em}
-h3{font-size:20px;font-weight:500;font-family:var(--body)}
-p{margin:0;max-width:62ch}
-.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:60px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+h2{font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.015em}
+h3{font-size:21px;font-weight:600;font-family:var(--body);line-height:1.3}
+p{margin:0;max-width:64ch}
+.eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
 .lead{color:var(--muted);margin-top:14px}
 .num{font-variant-numeric:tabular-nums}
+.band{background:var(--band);color:var(--band-fg)}
+.band .eyebrow{color:var(--gold-hi)}
+.band .lead{color:var(--band-fg);opacity:.82}
 
 /* hero */
-.hero{background:var(--band);color:var(--band-fg);padding-block:64px 48px;position:relative;overflow:hidden}
-.hero canvas#pulse{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero{position:relative;overflow:hidden;padding-block:64px 52px}
+.hero canvas#pulse{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none}
 .hero .wrap{position:relative}
-.hero h1{font-size:clamp(44px,9vw,92px);font-weight:700;letter-spacing:-.02em}
-.hero .sub{font-size:clamp(20px,3vw,26px);margin-top:8px;color:var(--band-fg);opacity:.85}
-.hero .eyebrow{color:#D9A94A}
-.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;margin-top:40px;background:rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
-.kpi{background:var(--band);padding:20px 18px;min-width:0}
-.kpi b{display:block;font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-.kpi span{display:block;font-size:15px;line-height:1.35;margin-top:8px;opacity:.8}
-@media (max-width:640px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hero h1{font-size:clamp(48px,10vw,104px);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:clamp(20px,3vw,26px);margin-top:10px;opacity:.88;max-width:34ch}
+.price{display:inline-flex;align-items:baseline;gap:10px;margin-top:22px;padding:10px 18px;border:1px solid rgba(217,169,74,.55);border-radius:999px;font-size:17px}
+.price b{font-family:var(--display);font-size:24px;color:var(--gold-hi);font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;margin-top:36px;background:rgba(255,255,255,.12);border-radius:16px;overflow:hidden}
+.kpi{background:var(--band);padding:22px 20px;min-width:0}
+.kpi.main{background:var(--band2)}
+.kpi b{display:block;font-family:var(--display);font-size:clamp(32px,5.2vw,48px);font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.kpi.main b{color:var(--gold-hi)}
+.kpi span{display:block;font-size:16px;line-height:1.35;margin-top:9px;opacity:.82}
+@media (max-width:680px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:26px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:26px;min-width:0}
 .card h3{margin-bottom:4px}
-.card .note{font-size:14px;color:var(--muted);margin-top:10px}
-.chart{position:relative;height:300px;margin-top:14px}
-.chart.tall{height:360px}
+.note{font-size:15px;color:var(--muted);margin-top:10px;line-height:1.5}
+.chart{position:relative;height:310px;margin-top:14px}
+.chart.tall{height:380px}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-@media (max-width:720px){.grid2{grid-template-columns:1fr}}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
 .donut{position:relative;height:230px}
 .donut .c{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center}
-.donut .c b{font-family:var(--display);font-size:44px;line-height:1}
-.donut .c small{display:block;font-size:13px;color:var(--muted)}
+.donut .c b{font-family:var(--display);font-size:46px;line-height:1}
+.donut .c small{display:block;font-size:14px;color:var(--muted)}
+
+/* botões segmentados */
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:inherit;font-size:16px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;transition:background .2s,border-color .2s}
+.seg button:hover{border-color:var(--gold)}
+.seg button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600}
+.band .seg button{border-color:rgba(255,255,255,.3);color:var(--band-fg)}
+.band .seg button[aria-pressed="true"]{background:var(--gold-hi);border-color:var(--gold-hi);color:#1C3528}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+
+/* calendário */
+.calhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:18px;margin-top:28px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:15px;opacity:.85}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+.months{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:860px){.months{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:380px){.months{grid-template-columns:1fr}}
+.month{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:10px;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,border-color .3s}
+.month.pre{transform:translateY(14px);opacity:.4}
+.month.hot{border-color:rgba(217,169,74,.6)}
+.mtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mtop b{font-family:var(--display);font-size:22px;font-weight:700;color:#fff}
+.mtop small{font-size:14px;opacity:.8;font-variant-numeric:tabular-nums}
+.heat{height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.heat i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#5E9C76,var(--gold-hi));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;line-height:1.25;text-align:left;padding:6px 10px;border-radius:9px;cursor:pointer;border:1px solid transparent;color:var(--band-fg);background:rgba(255,255,255,.08);max-width:100%}
+.chip.alto{background:rgba(217,169,74,.2);border-color:rgba(217,169,74,.5);color:#fff;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--gold-hi);color:#1C3528;border-color:var(--gold-hi)}
+.chip:hover{border-color:var(--gold-hi)}
+.detail{margin-top:20px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px}
+@media (max-width:760px){.detail{grid-template-columns:1fr}}
+.detail h3{font-family:var(--display);font-size:30px;font-weight:700;color:#fff}
+.detail .where{color:var(--gold-hi);font-weight:500;margin-top:4px}
+.detail dl{margin:0;display:grid;gap:12px}
+.detail dt{font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.detail dd{margin:2px 0 0;font-size:18px}
+.detail .fx{display:flex;align-items:baseline;gap:10px;margin-top:14px}
+.detail .fx b{font-family:var(--display);font-size:44px;line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.upcoming{margin-top:30px}
+.upcoming h3{color:#fff}
+.tl{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(255,255,255,.12)}
+.tl li b{font-variant-numeric:tabular-nums;color:var(--gold-hi);font-weight:600}
+.tl li span small{display:block;font-size:15px;opacity:.75}
+@media (max-width:520px){.tl li{grid-template-columns:1fr;gap:2px}}
 
 /* simulador */
-.sim{background:var(--band);color:var(--band-fg)}
-.sim .eyebrow{color:#D9A94A}
-.sim .lead{color:var(--band-fg);opacity:.8}
 .simbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:30px}
-@media (max-width:720px){.simbox{grid-template-columns:1fr}}
-.ctrl{display:grid;gap:22px}
-.ctrl label{display:flex;justify-content:space-between;gap:12px;font-size:16px}
-.ctrl label output{font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;accent-color:#D9A94A;height:28px}
-.seg{display:flex;flex-wrap:wrap;gap:8px}
-.seg button{font:inherit;font-size:15px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:var(--band-fg);cursor:pointer}
-.seg button[aria-pressed="true"]{background:#D9A94A;border-color:#D9A94A;color:#1C3528;font-weight:500}
-.seg button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.out{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px;display:grid;gap:16px;align-content:start}
-.out .big{font-family:var(--display);font-size:clamp(40px,7vw,60px);font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-.out .row{display:flex;justify-content:space-between;gap:10px;font-size:16px;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
-.out .row b{font-weight:500;font-variant-numeric:tabular-nums}
-.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
-.meter i{display:block;height:100%;width:0;background:#D9A94A;border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+@media (max-width:760px){.simbox{grid-template-columns:1fr}}
+.ctrl{display:grid;gap:22px;align-content:start}
+.ctrl label{display:flex;justify-content:space-between;gap:12px;font-size:17px}
+.ctrl label output{font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+.ctrl .hint{font-size:14px;opacity:.7;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--gold-hi);height:30px}
+.out{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:24px;display:grid;gap:15px;align-content:start}
+.out .big{font-family:var(--display);font-size:clamp(46px,8vw,68px);font-weight:700;line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.out .row{display:flex;justify-content:space-between;gap:10px;font-size:17px;border-top:1px solid rgba(255,255,255,.12);padding-top:11px}
+.out .row b{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.meter{height:12px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;position:relative}
+.meter i{display:block;height:100%;width:0;background:var(--gold-hi);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.meter em{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fff;opacity:.8}
+.mcap{display:flex;justify-content:space-between;font-size:14px;opacity:.75;margin-top:-6px}
 
-.list{display:grid;gap:12px;margin-top:22px;padding:0;list-style:none}
-.list li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
-.list li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold);margin-top:10px;justify-self:center}
-footer{padding-block:36px 48px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+/* tabela de premissas */
+.tablewrap{overflow-x:auto;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:16px;min-width:520px}
+th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+.list{display:grid;gap:12px;margin-top:20px;padding:0;list-style:none}
+.list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
+.list li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold);margin-top:11px;justify-self:center}
+.compare{display:grid;gap:14px;margin-top:18px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 120px;gap:12px;align-items:center;font-size:16px}
+.bar .track{height:30px;background:var(--surface2);border-radius:8px;overflow:hidden}
+.bar .track i{display:block;height:100%;width:0;border-radius:8px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.bar b{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+@media (max-width:560px){.bar{grid-template-columns:1fr auto}.bar .track{grid-column:1/-1;order:3}}
+.refreal{display:grid;gap:4px;margin-top:22px;padding:16px 20px;border-left:4px solid var(--gold);background:var(--surface);border-radius:0 14px 14px 0;font-size:17px}
+.refreal b{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.nights{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:860px){.nights{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.nights{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.night{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.night.base{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.night .tag{position:absolute;top:-11px;left:14px;background:var(--gold);color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+.night .nn{font-family:var(--display);font-size:40px;font-weight:700;line-height:1}
+.night .nn small{font-family:var(--body);font-size:16px;font-weight:500;color:var(--muted);margin-left:4px}
+.night .oc{font-size:15px;color:var(--muted)}
+.night .liq{font-family:var(--display);font-size:clamp(24px,3vw,30px);font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.1}
+.night .lb{font-size:14px;color:var(--muted)}
+.night .br{font-size:16px;font-variant-numeric:tabular-nums}
+.night .vbar{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:auto}
+.night .vbar i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+footer{padding-block:40px 52px;font-size:15px;color:var(--muted);border-top:1px solid var(--line)}
 footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 @media (max-width:640px){footer ul{columns:1}}
 .reveal{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s}
-.reveal.pre{transform:translateY(18px);opacity:.35}
-@media (prefers-reduced-motion:reduce){.reveal,.reveal.pre{transition:none;transform:none;opacity:1}.meter i{transition:none}}
+.reveal.pre{transform:translateY(18px);opacity:.4}
+@media (prefers-reduced-motion:reduce){.reveal,.reveal.pre,.month,.month.pre{transition:none;transform:none;opacity:1}.meter i,.heat i,.bar .track i{transition:none}}
 </style>
-<header class="hero">
+
+<header class="hero band">
   <canvas id="pulse" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="eyebrow">Estudo de rentabilidade · outubro 2026</div>
     <h1>Cidade Jardim</h1>
-    <p class="sub">Barra Olímpica · Rio de Janeiro. Locação por temporada movida a eventos.</p>
+    <p class="sub">Barra Olímpica, Rio de Janeiro. Um studio no meio do eixo de eventos da Zona Oeste, alugado por temporada.</p>
+    <div class="price">Studio a partir de <b>R$ 365 mil</b></div>
     <div class="kpis">
-      <div class="kpi"><b class="count" data-to="700" data-suf=" mil+">700 mil+</b><span>pessoas no Rock in Rio 2026</span></div>
-      <div class="kpi"><b class="count" data-to="740" data-suf=" mil">740 mil</b><span>visitantes na Bienal do Livro 2025</span></div>
-      <div class="kpi"><b class="count" data-to="83" data-suf=" mil">83 mil</b><span>visitantes na ROG.e 2026, de 77 países</span></div>
-      <div class="kpi"><b class="count" data-to="97.98" data-dec="2" data-suf="%">97,98%</b><span>ocupação hoteleira na Barra no Carnaval 2026</span></div>
-      <div class="kpi"><b class="count" data-to="2.2" data-dec="1" data-suf=" mi">2,2 mi</b><span>turistas estrangeiros no RJ em 2025</span></div>
-      <div class="kpi"><b class="count" data-to="2616" data-pre="R$ " data-thou="1">R$ 2.616</b><span>líquido por mês, studio 32 m² (cenário Base)</span></div>
+      <div class="kpi main"><b class="count" data-to="3663" data-pre="R$ " data-thou="1">R$ 3.663</b><span>líquido por mês com gestora profissional (cenário Base)</span></div>
+      <div class="kpi"><b class="count" data-to="6593" data-pre="R$ " data-thou="1">R$ 6.593</b><span>receita bruta média por mês</span></div>
+      <div class="kpi"><b class="count" data-to="10.6" data-dec="1" data-suf="% a.a.">10,6% a.a.</b><span>retorno líquido sobre o investimento total</span></div>
+      <div class="kpi"><b class="count" data-to="4982" data-pre="R$ " data-thou="1">R$ 4.982</b><span>líquido por mês em autogestão</span></div>
+      <div class="kpi"><b class="count" data-to="1.9" data-dec="1" data-suf="x">1,9x</b><span>o que renderia no aluguel tradicional</span></div>
+      <div class="kpi"><b class="count" data-to="5128" data-pre="R$ " data-thou="1">R$ 5.128</b><span>líquido por mês com diária de R$ 430 e 20 noites alugadas</span></div>
     </div>
   </div>
 </header>
@@ -106,16 +192,16 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 <section><div class="wrap">
   <div class="eyebrow">Onde fica</div>
   <h2>No meio do eixo de eventos da Zona Oeste</h2>
-  <p class="lead">O Cidade Jardim é um bairro planejado da Carvalho Hosken, cercado pelo Cinturão Verde. Num raio de poucos minutos estão a Cidade do Rock, o Riocentro e a Farmasi Arena, os três maiores geradores de demanda de hospedagem da região.</p>
+  <p class="lead">O Cidade Jardim é o bairro planejado da Carvalho Hosken, cercado pelo Cinturão Verde. A poucos minutos estão a Cidade do Rock, o Riocentro, a Farmasi Arena e a Cidade das Artes. São os maiores geradores de demanda de hospedagem da região.</p>
   <div class="card reveal">
     <h3>Público por evento</h3>
-    <p class="note" style="margin-top:0">Pessoas por edição. Farmasi Arena: capacidade máxima por show.</p>
-    <div class="chart"><canvas id="cPublico" role="img" aria-label="Público por evento: Bienal do Livro 740 mil, Rock in Rio 700 mil, ROG.e 83 mil, ABAV Expo 42 mil, show na Farmasi Arena 18 mil"></canvas></div>
+    <p class="note" style="margin-top:0">Pessoas por edição. Farmasi Arena: capacidade máxima de um show.</p>
+    <div class="chart"><canvas id="cPublico" role="img" aria-label="Público por evento: Bienal do Livro 740 mil, Rock in Rio 700 mil, ROG.e 83 mil, Rio2C 55 mil, ABAV Expo 40 mil, show na Farmasi Arena 18,8 mil"></canvas></div>
   </div>
   <div class="grid2">
     <div class="card reveal"><h3>Rock in Rio 2026</h3><p class="note" style="margin-top:0">Público de fora do estado do Rio</p>
-      <div class="donut"><canvas id="dRir" role="img" aria-label="49% do público de fora do RJ"></canvas><div class="c"><div><b>49%</b><small>de fora do RJ</small></div></div></div></div>
-    <div class="card reveal"><h3>ROG.e 2026 (Riocentro)</h3><p class="note" style="margin-top:0">Público de fora do estado do Rio</p>
+      <div class="donut"><canvas id="dRir" role="img" aria-label="Metade do público de fora do RJ"></canvas><div class="c"><div><b>50%</b><small>de fora do RJ</small></div></div></div></div>
+    <div class="card reveal"><h3>ROG.e 2026, no Riocentro</h3><p class="note" style="margin-top:0">Público de fora do estado do Rio</p>
       <div class="donut"><canvas id="dRog" role="img" aria-label="44% do público de fora do RJ"></canvas><div class="c"><div><b>44%</b><small>de fora do RJ</small></div></div></div></div>
   </div>
 </div></section>
@@ -126,151 +212,278 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <div class="grid2">
     <div class="card reveal"><h3>Ocupação hoteleira média na cidade</h3>
       <div class="chart"><canvas id="cOcup" role="img" aria-label="Carnaval 2026 99,02%, Réveillon 2025/26 90,58%, Rock in Rio 2024 88%, Rock in Rio 2026 primeira etapa 77,6%"></canvas></div>
-      <p class="note">Fonte: HotéisRIO. *1ª etapa. Na região Barra/Recreio/São Conrado, o Carnaval 2026 chegou a 97,98%.</p></div>
+      <p class="note">Fonte: HotéisRIO. *1ª etapa. Na Barra, Recreio e São Conrado, o Carnaval 2026 chegou a 97,98%.</p></div>
     <div class="card reveal"><h3>Turistas estrangeiros no estado do Rio</h3>
       <div class="chart"><canvas id="cTur" role="img" aria-label="2024: 1.528.133; 2025: 2.196.443, alta de 43,7%"></canvas></div>
       <p class="note">Fonte: Embratur. Alta de 43,7% de um ano para o outro.</p></div>
   </div>
-  <div class="card reveal"><h3>Ocupação do Airbnb na região x premissa do estudo</h3>
-    <div class="chart" style="height:280px"><canvas id="cAirbnb" role="img" aria-label="Barra 12 meses 63%, Cidade do Rio 62%, Barra verão 61%, Jacarepaguá 52%, modelo 61%"></canvas></div>
-    <p class="note">Airbtics e GuestFavorites (2025–2026). Estimativas de terceiros a partir de anúncios públicos.</p></div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="eyebrow">Sazonalidade</div>
-  <h2>Os eventos fazem metade da receita</h2>
-  <p class="lead">No cenário Base, os períodos de pico ocupam 30% das noites do ano e geram 54% da receita bruta. Setembro, com Rock in Rio e ROG.e, rivaliza com o verão.</p>
-  <div class="card reveal"><h3>Receita bruta por mês, studio 32 m²</h3>
-    <div class="seg" id="segMes" style="margin-top:10px">
-      <button type="button" aria-pressed="true" data-v="Base" style="color:var(--fg);border-color:var(--line)">Base</button>
-      <button type="button" aria-pressed="false" data-v="Conservador" style="color:var(--fg);border-color:var(--line)">Conservador</button>
-      <button type="button" aria-pressed="false" data-v="Otimista" style="color:var(--fg);border-color:var(--line)">Otimista</button>
+<section class="band" id="calendario"><div class="wrap">
+  <div class="eyebrow">Calendário de eventos</div>
+  <h2>Doze meses de demanda na porta</h2>
+  <p class="lead">Os eventos da região se revezam: anos pares têm Rock in Rio e ROG.e, anos ímpares têm Bienal do Livro, LAAD e ABAV Expo. A barra de cada mês mostra a receita esperada do studio naquele mês, no cenário Base. Toque num evento para ver os detalhes.</p>
+  <div class="calhead">
+    <div class="seg" id="segAno" role="group" aria-label="Tipo de ano">
+      <button type="button" aria-pressed="true" data-v="par">Anos pares · 2028, 2030</button>
+      <button type="button" aria-pressed="false" data-v="impar">Anos ímpares · 2027, 2029</button>
     </div>
-    <div class="chart tall"><canvas id="cMes" role="img" aria-label="Receita bruta por mês, separando dias comuns e picos"></canvas></div>
-    <p class="note">Ano com Rock in Rio. Distribuição ilustrativa dos eventos; as datas mudam a cada edição.</p></div>
+    <div class="legend"><span><i style="background:var(--gold-hi)"></i>Impacto alto</span><span><i style="background:rgba(255,255,255,.35)"></i>Impacto médio</span></div>
+  </div>
+  <div class="months" id="months"></div>
+  <div class="detail" id="detail" aria-live="polite"></div>
+  <div class="upcoming">
+    <h3>Próximas datas já confirmadas</h3>
+    <ul class="tl">
+      <li><b>7 a 13 fev 2027</b><span>Carnaval<small>Desfiles na Sapucaí; a cidade inteira lota</small></span></li>
+      <li><b>13 a 16 abr 2027</b><span>LAAD Defence &amp; Security<small>Riocentro</small></span></li>
+      <li><b>3 a 12 set 2027</b><span>Bienal do Livro Rio<small>740 mil visitantes na edição de 2025, no Riocentro</small></span></li>
+      <li><b>29 set a 1º out 2027</b><span>ABAV Expo<small>Riocentro, nos anos ímpares até 2031</small></span></li>
+      <li><b>Setembro 2028</b><span>Rock in Rio<small>Edição confirmada pela organização; datas a anunciar</small></span></li>
+      <li><b>Até 2030</b><span>Web Summit Rio<small>Contrato com a Prefeitura garante as edições no Riocentro</small></span></li>
+    </ul>
+  </div>
 </div></section>
 
-<section class="sim"><div class="wrap">
+<section><div class="wrap">
+  <div class="eyebrow">Sazonalidade</div>
+  <h2>Os eventos fazem quase metade da receita</h2>
+  <p class="lead" id="sazLead">No cenário Base, as noites de evento e alta temporada geram cerca de 45% da receita bruta do ano. Setembro rivaliza com o verão.</p>
+  <div class="card reveal"><h3>Receita bruta por mês, studio de 32 m²</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
+      <div class="seg" id="segMes" role="group" aria-label="Cenário">
+        <button type="button" aria-pressed="false" data-v="Conservador">Conservador</button>
+        <button type="button" aria-pressed="true" data-v="Base">Base</button>
+        <button type="button" aria-pressed="false" data-v="Otimista">Otimista</button>
+      </div>
+      <div class="seg" id="segMesAno" role="group" aria-label="Tipo de ano">
+        <button type="button" aria-pressed="true" data-v="par">Ano par</button>
+        <button type="button" aria-pressed="false" data-v="impar">Ano ímpar</button>
+      </div>
+    </div>
+    <div class="chart tall"><canvas id="cMes" role="img" aria-label="Receita bruta por mês, separando dias comuns e eventos"></canvas></div>
+    <p class="note">As datas dos eventos mudam a cada edição; a distribuição por mês é a de um ano típico.</p></div>
+</div></section>
+
+
+<section style="padding-top:0" id="noites"><div class="wrap">
+  <div class="eyebrow">Noites alugadas por mês</div>
+  <h2>Quanto rende com 10, 20 ou 30 noites no mês</h2>
+  <p class="lead">Escolha a diária média e veja quanto o studio rende com 10, 15, 20, 25 ou 30 noites alugadas no mês. Com o calendário de eventos da Barra, o cenário Base fica perto de 20 noites.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px">
+    <div class="seg" id="segDiaria" role="group" aria-label="Diária média"><button type="button" aria-pressed="false" data-v="336">R$ 336 · média do estudo</button><button type="button" aria-pressed="true" data-v="430">R$ 430</button><button type="button" aria-pressed="false" data-v="470">R$ 470</button></div>
+    <div class="seg" id="segGestN" role="group" aria-label="Gestão"><button type="button" aria-pressed="true" data-v="0.20">Gestora (20%)</button><button type="button" aria-pressed="false" data-v="0">Autogestão</button></div>
+  </div>
+  <div class="refreal"><b>Referência real, outubro de 2026</b><span>Flat Union Suites, num dia comum sem evento: 4 noites por R$ 1.790 com taxas, cerca de R$ 430 a R$ 450 por noite. E numa localização menos estratégica que o Cidade Jardim.</span></div>
+  <div class="nights" id="nights"></div>
+  <p class="note" id="nightsNote"></p>
+  <div class="card reveal">
+    <h3>Líquido por mês: diária × noites alugadas</h3>
+    <div class="tablewrap"><table id="tUnid"></table></div>
+    <p class="note" id="tUnidNote"></p>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
   <div class="eyebrow">Simulador</div>
   <h2>Faça a sua conta</h2>
-  <p class="lead">Mexa na diária e na ocupação dos dias comuns. Os picos de eventos seguem as regras do estudo.</p>
+  <p class="lead">Ajuste o preço da unidade, a diária e a ocupação dos dias comuns. Os eventos seguem as premissas do estudo.</p>
   <div class="simbox">
     <div class="ctrl">
-      <div><label for="sAdr">Diária em dias comuns <output id="oAdr" class="num">R$ 210</output></label><input type="range" id="sAdr" min="150" max="320" step="5" value="210"></div>
-      <div><label for="sOcc">Ocupação em dias comuns <output id="oOcc" class="num">52%</output></label><input type="range" id="sOcc" min="30" max="80" step="1" value="52"></div>
-      <div><label for="sInv">Investimento total <output id="oInv" class="num">R$ 447.000</output></label><input type="range" id="sInv" min="300000" max="700000" step="5000" value="447000"></div>
-      <div><div style="font-size:16px;margin-bottom:8px">Ano</div>
-        <div class="seg" id="segRir"><button type="button" aria-pressed="true" data-v="1">Com Rock in Rio</button><button type="button" aria-pressed="false" data-v="0">Sem Rock in Rio</button></div></div>
+      <div><label for="sPreco">Preço da unidade <output id="oPreco" class="num">R$ 365.000</output></label><input type="range" id="sPreco" min="300000" max="600000" step="5000" value="365000"><div class="hint">Investimento total soma mobília (R$ 35 mil) e ITBI com cartório (3,8%).</div></div>
+      <div><label for="sAdr">Diária em dias comuns <output id="oAdr" class="num">R$ 260</output></label><input type="range" id="sAdr" min="180" max="500" step="5" value="260"></div>
+      <div><label for="sOcc">Ocupação em dias comuns <output id="oOcc" class="num">55%</output></label><input type="range" id="sOcc" min="30" max="80" step="1" value="55"></div>
+      <div><div style="font-size:17px;margin-bottom:8px">Gestão</div>
+        <div class="seg" id="segGest" role="group" aria-label="Gestão"><button type="button" aria-pressed="true" data-v="0.20">Gestora (20%)</button><button type="button" aria-pressed="false" data-v="0">Autogestão</button></div></div>
+      <div><div style="font-size:17px;margin-bottom:8px">Ano</div>
+        <div class="seg" id="segRir" role="group" aria-label="Tipo de ano"><button type="button" aria-pressed="true" data-v="media">Média</button><button type="button" aria-pressed="false" data-v="par">Par (Rock in Rio)</button><button type="button" aria-pressed="false" data-v="impar">Ímpar (Bienal)</button></div></div>
     </div>
     <div class="out" aria-live="polite">
-      <div><div style="font-size:15px;opacity:.8">Líquido por mês (antes do IR)</div><div class="big" id="rMes">R$ 2.616</div></div>
-      <div class="meter" aria-hidden="true"><i id="rBar"></i></div>
-      <div class="row"><span>Retorno ao ano</span><b id="rYield">7,0%</b></div>
-      <div class="row"><span>Receita bruta/ano</span><b id="rRec">R$ 61.084</b></div>
-      <div class="row"><span>Ocupação média do ano</span><b id="rOcc">61%</b></div>
-      <div class="row"><span>Diária média do ano</span><b id="rAdr">R$ 274</b></div>
-      <div class="row"><span>Líquido/ano</span><b id="rLiq">R$ 31.391</b></div>
+      <div><div style="font-size:16px;opacity:.82">Líquido por mês, antes do IR</div><div class="big" id="rMes">R$ 3.663</div></div>
+      <div class="meter" aria-hidden="true"><i id="rBar"></i><em id="rRef"></em></div>
+      <div class="mcap"><span>R$ 0</span><span>linha branca: aluguel tradicional</span><span>R$ 8 mil</span></div>
+      <div class="row"><span>Receita bruta por mês</span><b id="rBruto">R$ 6.593</b></div>
+      <div class="row"><span>Retorno ao ano</span><b id="rYield">10,6%</b></div>
+      <div class="row"><span>Investimento total</span><b id="rInv">R$ 413.870</b></div>
+      <div class="row"><span>Retorno do capital só com a renda</span><b id="rPay">9,4 anos</b></div>
+      <div class="row"><span>Ocupação média do ano</span><b id="rOcc">64,5%</b></div>
+      <div class="row"><span>Diária média do ano</span><b id="rAdrM">R$ 336</b></div>
+      <div class="row"><span>Comparado ao aluguel tradicional</span><b id="rX">1,9x</b></div>
     </div>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <div class="eyebrow">Resultado</div>
-  <h2>Três cenários para um studio</h2>
+  <h2>Temporada rende quase o dobro do aluguel comum</h2>
+  <p class="lead">Um studio de 32 m² na Barra Olímpica aluga por cerca de R$ 2.100 no contrato tradicional, ou R$ 1.900 depois da taxa da imobiliária. Na temporada, mesmo pagando gestora, o líquido fica bem acima.</p>
+  <div class="card reveal">
+    <h3>Líquido por mês, comparado</h3>
+    <div class="compare" id="compare"></div>
+    <p class="note">Temporada: média entre anos pares e ímpares, com gestora de 20%. Aluguel tradicional: inquilino paga condomínio e IPTU.</p>
+  </div>
   <div class="grid2">
     <div class="card reveal"><h3>Da receita ao líquido (Base, por ano)</h3>
-      <div class="chart tall"><canvas id="cCasc" role="img" aria-label="Receita 61.084 menos gestão, plataforma, manutenção, condomínio e contas resulta em líquido de 31.391"></canvas></div></div>
-    <div class="card reveal"><h3>Líquido acumulado em 10 anos</h3>
-      <div class="chart tall"><canvas id="cAcum" role="img" aria-label="Acumulado em 10 anos: conservador, base e otimista"></canvas></div>
-      <p class="note">Anos pares com Rock in Rio. Sem reajustes e sem valorização do imóvel.</p></div>
+      <div class="chart tall"><canvas id="cCasc" role="img" aria-label="Receita de 79.118 reais menos gestão, plataforma, manutenção, condomínio e IPTU e contas resulta em líquido de 43.956 reais por ano"></canvas></div></div>
+    <div class="card reveal"><h3>Renda acumulada em 10 anos</h3>
+      <div class="chart tall"><canvas id="cAcum" role="img" aria-label="Renda líquida acumulada em 10 anos nos três cenários, comparada ao investimento total"></canvas></div>
+      <p class="note">Sem reajuste das diárias e sem contar a valorização do imóvel. A linha tracejada é o investimento total.</p></div>
   </div>
-  <div class="card reveal"><h3>Pontos de atenção</h3>
-    <ul class="list">
-      <li><span>Confirme na convenção do condomínio que a locação por temporada é permitida.</span></li>
-      <li><span>Há vários lançamentos de studios na Barra Olímpica, o que aumenta a concorrência.</span></li>
-      <li><span>Mais da metade da receita vem de picos; meses fracos pedem preço dinâmico.</span></li>
-      <li><span>Resultado antes do IR. Projeção, não garantia de rentabilidade.</span></li>
-    </ul></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">Premissas</div>
+  <h2>De onde saem os números</h2>
+  <div class="card reveal">
+    <div class="tablewrap"><table>
+      <thead><tr><th>Item</th><th>Conservador</th><th>Base</th><th>Otimista</th></tr></thead>
+      <tbody>
+        <tr><td>Diária em dias comuns</td><td class="n">R$ 220</td><td class="n">R$ 260</td><td class="n">R$ 300</td></tr>
+        <tr><td>Ocupação em dias comuns</td><td class="n">48%</td><td class="n">55%</td><td class="n">62%</td></tr>
+        <tr><td>Diária média no ano, com eventos</td><td class="n">R$ 276</td><td class="n">R$ 336</td><td class="n">R$ 392</td></tr>
+        <tr><td>Ocupação média no ano</td><td class="n">57,1%</td><td class="n">64,5%</td><td class="n">70,1%</td></tr>
+        <tr><td>Receita bruta por mês</td><td class="n">R$ 4.799</td><td class="n">R$ 6.593</td><td class="n">R$ 8.350</td></tr>
+        <tr><td><b>Líquido por mês</b></td><td class="n">R$ 2.353</td><td class="n">R$ 3.663</td><td class="n">R$ 4.946</td></tr>
+        <tr><td><b>Retorno ao ano</b></td><td class="n">6,8%</td><td class="n">10,6%</td><td class="n">14,3%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Referência de mercado: a diária mediana do Airbnb na Barra da Tijuca é de R$ 382, e os 25% melhores anúncios têm ocupação de 73% (GuestFavorites, jan a set de 2026). O studio fica abaixo dessa mediana porque a média mistura imóveis maiores.</p>
+  </div>
+  <div class="grid2">
+    <div class="card reveal"><h3>Custos considerados</h3>
+      <ul class="list">
+        <li><span>Gestora profissional: 20% da receita. O mercado cobra de 16% a 35%.</span></li>
+        <li><span>Taxa da plataforma: 3%. Manutenção e reposição: 4%.</span></li>
+        <li><span>Condomínio e IPTU: R$ 800 por mês. Luz, internet e streaming: R$ 350 por mês.</span></li>
+        <li><span>Limpeza paga pelo hóspede, na taxa de limpeza de cada reserva.</span></li>
+        <li><span>Investimento: unidade + mobília de R$ 35 mil + 3,8% de ITBI e cartório.</span></li>
+      </ul></div>
+    <div class="card reveal"><h3>Pontos de atenção</h3>
+      <ul class="list">
+        <li><span>Confirmar na convenção do condomínio que a locação por temporada é permitida.</span></li>
+        <li><span>Há vários lançamentos de studios na Barra Olímpica, o que aumenta a concorrência.</span></li>
+        <li><span>Quase metade da receita vem dos picos; meses fracos pedem preço dinâmico.</span></li>
+        <li><span>Valores antes do Imposto de Renda. Projeção, não garantia de rentabilidade.</span></li>
+      </ul></div>
+  </div>
 </div></section>
 </main>
 
 <footer><div class="wrap">
-  <b style="color:var(--fg)">Strategic Marketing · premissas e fontes</b>
-  <p style="margin-top:6px">Imóvel de referência: studio 32 m² a R$ 417 mil (In the Park Cidade Jardim) + R$ 30 mil de mobília. Custos: gestão 20%, plataforma 3%, manutenção 4%, condomínio + IPTU R$ 750/mês, contas R$ 350/mês.</p>
+  <b style="color:var(--fg)">Strategic Marketing · fontes</b>
+  <p style="margin-top:6px">Projeção para o studio de 32 m² entregue, mobiliado e em operação. Preço de tabela informado: a partir de R$ 365 mil.</p>
   <ul>
-    <li>Diário do Rio: balanço do Rock in Rio 2026</li>
-    <li>HotéisRIO via Diário do Rio, Brasilturis e Mercado & Eventos</li>
+    <li>GuestFavorites: Airbnb na Barra da Tijuca, 2026</li>
+    <li>HostnJoy: receita e custos de gestão no Rio, 2026</li>
+    <li>VivaReal: aluguéis de 1 quarto na Barra Olímpica</li>
+    <li>DGABC e Diário do Rio: Rock in Rio 2026 e 2028</li>
     <li>Brasil Energia: ROG.e 2026</li>
-    <li>PublishNews: Bienal do Livro 2025</li>
-    <li>Panrotas: ABAV Expo 2025</li>
-    <li>GL events, InvestNews: Farmasi Arena</li>
-    <li>Embratur via Diário do Rio: turistas 2025</li>
-    <li>Airbtics e GuestFavorites: dados de Airbnb</li>
-    <li>MySide e Loft: In the Park Cidade Jardim</li>
+    <li>Diário do Rio e PublishNews: Bienal do Livro</li>
+    <li>Panrotas: ABAV Expo e Rock in Rio</li>
+    <li>Canaltech e Portal Radar: Web Summit e feiras no Riocentro</li>
+    <li>ABC da Comunicação: Rio2C 2026</li>
+    <li>HotéisRIO e Embratur via Diário do Rio</li>
+    <li>Farmasi Arena: capacidade e histórico</li>
+    <li>LAAD Defence &amp; Security 2027</li>
   </ul>
 </div></footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// Modelo de rentabilidade (mesmas premissas do PDF)
-const BLOCOS = [
-  { nome: "Réveillon", n: 5, o: 0.95, m: 3.0, dist: [3,0,0,0,0,0,0,0,0,0,0,2] },
-  { nome: "Carnaval", n: 5, o: 0.95, m: 2.5, dist: [0,5,0,0,0,0,0,0,0,0,0,0] },
-  { nome: "Rock in Rio", n: 10, o: 0.95, m: 3.0, dist: [0,0,0,0,0,0,0,0,10,0,0,0], rir: true },
-  { nome: "Verão", n: 45, o: 0.75, m: 1.4, dist: [20,15,0,0,0,0,0,0,0,0,0,10] },
-  { nome: "Riocentro", n: 25, o: 0.85, m: 1.6, dist: [0,0,3,4,3,5,0,0,4,6,0,0] },
-  { nome: "Parque Olímpico", n: 20, o: 0.80, m: 1.4, dist: [0,0,2,2,2,2,2,2,0,2,3,3] },
-];
-const CENARIOS = {
-  Conservador: { adr: 180, occ: 0.45, aO: -0.10, aM: 0.85 },
-  Base:        { adr: 210, occ: 0.52, aO: 0,     aM: 1.0 },
-  Otimista:    { adr: 240, occ: 0.60, aO: 0.03,  aM: 1.1 },
-};
+/* ===== Modelo de rentabilidade ===== */
 const DIAS = [31,28,31,30,31,30,31,31,30,31,30,31];
-const FIXOS = 750 * 12 + 350 * 12;
-const VAR = 0.20 + 0.03 + 0.04;
+const MESES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const MESES_L = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+// noites por mês, ocupação, multiplicador sobre a diária comum
+const BLOCOS = [
+  { nome:"Réveillon",              n:[2,0,0,0,0,0,0,0,0,0,0,4],  o:.95, m:3.0 },
+  { nome:"Carnaval",               n:[0,6,0,0,0,0,0,0,0,0,0,0],  o:.95, m:2.6 },
+  { nome:"Alta temporada de verão",n:[22,14,0,0,0,0,0,0,0,0,0,10], o:.78, m:1.35 },
+  { nome:"Férias de julho",        n:[0,0,0,0,0,0,14,0,0,0,0,0], o:.72, m:1.15 },
+  { nome:"Web Summit Rio",         n:[0,0,0,0,0,5,0,0,0,0,0,0],  o:.90, m:1.8 },
+  { nome:"Rio2C",                  n:[0,0,0,0,6,0,0,0,0,0,0,0],  o:.80, m:1.35 },
+  { nome:"Feiras e congressos",    n:[0,0,4,0,4,0,0,0,0,4,3,0],  o:.82, m:1.4 },
+  { nome:"Shows e UFC",            n:[0,0,2,2,2,0,0,2,0,2,2,2],  o:.80, m:1.5 },
+  { nome:"Rock in Rio",            n:[0,0,0,0,0,0,0,0,10,0,0,0], o:.96, m:3.2, ano:"par" },
+  { nome:"ROG.e",                  n:[0,0,0,0,0,0,0,0,5,0,0,0],  o:.92, m:2.0, ano:"par" },
+  { nome:"Bienal do Livro",        n:[0,0,0,0,0,0,0,0,10,0,0,0], o:.88, m:1.7, ano:"impar" },
+  { nome:"LAAD",                   n:[0,0,0,5,0,0,0,0,0,0,0,0],  o:.88, m:1.8, ano:"impar" },
+  { nome:"ABAV Expo",              n:[0,0,0,0,0,0,0,0,2,2,0,0],  o:.85, m:1.5, ano:"impar" },
+];
+const CEN = {
+  Conservador: { adr:220, occ:.48, aO:-.08, aM:.85 },
+  Base:        { adr:260, occ:.55, aO:0,    aM:1.0 },
+  Otimista:    { adr:300, occ:.62, aO:.03,  aM:1.1 },
+};
+const PLAT = .03, MANUT = .04, AQUIS = .038;
+const ALUGUEL_TRAD = 1900;
+const UNID = { studio: { nome:"Studio 32 m²", preco:365000, fator:1.0, condo:800, contas:350, mobilia:35000 } };
+const investDe = (preco, u = UNID.studio) => preco * (1 + AQUIS) + u.mobilia;
+const cenU = (n, u = UNID.studio) => ({ ...CEN[n], adr: CEN[n].adr * u.fator });
 
-function calc(c, comRir = true, invest = 447000) {
-  const bl = BLOCOS.filter(b => comRir || !b.rir);
-  const nPico = bl.reduce((s, b) => s + b.n, 0);
-  const nNorm = 365 - nPico;
-  let noites = nNorm * c.occ, receita = nNorm * c.occ * c.adr;
-  const det = [{ nome: "Dias comuns", n: nNorm, rec: receita }];
-  for (const b of bl) {
-    const o = Math.min(0.98, b.o + c.aO), m = 1 + (b.m - 1) * c.aM;
-    const r = b.n * o * c.adr * m;
-    det.push({ nome: b.nome, n: b.n, rec: r });
-    noites += b.n * o; receita += r;
-  }
-  const gestao = receita * 0.20, plataforma = receita * 0.03, manut = receita * 0.04;
-  const custos = receita * VAR + FIXOS, liq = receita - custos;
-  return { receita, noites, occ: noites / 365, adr: receita / noites, gestao, plataforma, manut,
-           custos, liq, mensal: liq / 12, yield: liq / invest, det };
-}
-
-function mensal(c, comRir = true) {
+function mensal(c, ano) {
   return DIAS.map((d, i) => {
-    let pico = 0, recP = 0;
+    let pico = 0, recP = 0, noitesP = 0;
     for (const b of BLOCOS) {
-      if (!comRir && b.rir) continue;
-      const k = b.dist[i]; if (!k) continue;
-      const o = Math.min(0.98, b.o + c.aO), m = 1 + (b.m - 1) * c.aM;
-      recP += k * o * c.adr * m; pico += k;
+      if (b.ano && b.ano !== ano) continue;
+      const k = b.n[i]; if (!k) continue;
+      const o = Math.min(.98, b.o + c.aO), m = 1 + (b.m - 1) * c.aM;
+      recP += k * o * c.adr * m; noitesP += k * o; pico += k;
     }
-    return { pico: recP, norm: (d - pico) * c.occ * c.adr };
+    const nN = (d - pico) * c.occ;
+    return { pico: recP, norm: nN * c.adr, noites: noitesP + nN };
   });
 }
+function calcAno(c, ano, gestao = .20, preco = 365000, u = UNID.studio) {
+  const ms = mensal(c, ano);
+  const rec = ms.reduce((s, m) => s + m.pico + m.norm, 0);
+  const recPico = ms.reduce((s, m) => s + m.pico, 0);
+  const noites = ms.reduce((s, m) => s + m.noites, 0);
+  const g = rec * gestao, p = rec * PLAT, mt = rec * MANUT, fx = u.condo * 12, ct = u.contas * 12;
+  const liq = rec - g - p - mt - fx - ct, inv = investDe(preco, u);
+  return { rec, recPico, noites, g, p, mt, fx, ct, liq, inv };
+}
+function calc(c, ano = "media", gestao = .20, preco = 365000, u = UNID.studio) {
+  if (ano !== "media") { const r = calcAno(c, ano, gestao, preco, u); return fin(r); }
+  const a = calcAno(c, "par", gestao, preco, u), b = calcAno(c, "impar", gestao, preco, u), r = {};
+  for (const k in a) r[k] = (a[k] + b[k]) / 2;
+  return fin(r);
+}
+function fin(r) {
+  return { ...r, occ: r.noites / 365, adr: r.rec / r.noites, mesBruto: r.rec / 12, mesLiq: r.liq / 12, yield: r.liq / r.inv, payback: r.inv / r.liq };
+}
 
+/* ===== Calendário ===== */
+const EVENTOS = [
+  { id:"reveillon", nome:"Réveillon", local:"Orla da Barra e Copacabana", meses:[11], ano:"todo", imp:"alto", quando:"31 de dezembro, pacotes de 4 a 6 noites", dado:"Ocupação hoteleira de 90,6% na cidade no Réveillon 2025/26.", bloco:"Réveillon" },
+  { id:"verao", nome:"Alta temporada de verão", local:"Praias da Barra e do Recreio", meses:[0,1,11], ano:"todo", imp:"medio", quando:"Dezembro a fevereiro", dado:"Férias escolares e turismo de praia, com famílias e estrangeiros.", bloco:"Alta temporada de verão" },
+  { id:"carnaval", nome:"Carnaval", local:"Cidade inteira", meses:[1], ano:"todo", imp:"alto", quando:"2027: 7 a 13 de fevereiro", dado:"Ocupação de 97,98% na Barra, no Recreio e em São Conrado em 2026.", bloco:"Carnaval" },
+  { id:"sre", nome:"SRE Trade Show", local:"Riocentro", meses:[2], ano:"todo", imp:"medio", quando:"2026: 17 a 19 de março", dado:"Feira de negócios que abre a temporada de eventos do Riocentro.", bloco:"Feiras e congressos" },
+  { id:"laad", nome:"LAAD Defence & Security", local:"Riocentro", meses:[3], ano:"impar", imp:"medio", quando:"2027: 13 a 16 de abril", dado:"Feira internacional de defesa e segurança, nos anos ímpares.", bloco:"LAAD" },
+  { id:"estetica", nome:"Estética In Rio", local:"Riocentro", meses:[4], ano:"todo", imp:"medio", quando:"2026: 16 a 18 de maio", dado:"Feira do setor de beleza e estética.", bloco:"Feiras e congressos" },
+  { id:"rio2c", nome:"Rio2C", local:"Cidade das Artes, Barra", meses:[4], ano:"todo", imp:"medio", quando:"2026: 26 a 31 de maio", dado:"Mais de 55 mil pessoas de 30 países na edição de 2026.", bloco:"Rio2C" },
+  { id:"websummit", nome:"Web Summit Rio", local:"Riocentro", meses:[5], ano:"todo", imp:"alto", quando:"2026: 8 a 11 de junho", dado:"Contrato com a Prefeitura garante edições no Rio até 2030.", bloco:"Web Summit Rio" },
+  { id:"julho", nome:"Férias de julho", local:"Barra e Recreio", meses:[6], ano:"todo", imp:"medio", quando:"Julho", dado:"Férias escolares do meio do ano, com demanda de famílias.", bloco:"Férias de julho" },
+  { id:"farmasi", nome:"Shows e UFC", local:"Farmasi Arena", meses:[2,3,4,7,9,10,11], ano:"todo", imp:"medio", quando:"Agenda ao longo do ano", dado:"Até 18.768 pessoas por show. A arena já recebeu 10 eventos do UFC desde 2011.", bloco:"Shows e UFC" },
+  { id:"rir", nome:"Rock in Rio", local:"Cidade do Rock", meses:[8], ano:"par", imp:"alto", quando:"Próxima edição: setembro de 2028", dado:"700 mil pessoas em 2026, metade de fora do estado do Rio.", bloco:"Rock in Rio" },
+  { id:"roge", nome:"ROG.e", local:"Riocentro", meses:[8], ano:"par", imp:"alto", quando:"2026: 21 a 24 de setembro; próxima em 2028", dado:"83 mil visitantes de 77 países em 2026.", bloco:"ROG.e" },
+  { id:"bienal", nome:"Bienal do Livro", local:"Riocentro (sede em 2025)", meses:[8], ano:"impar", imp:"alto", quando:"2027: 3 a 12 de setembro", dado:"740 mil visitantes em 2025, recorde do evento.", bloco:"Bienal do Livro" },
+  { id:"abav", nome:"ABAV Expo", local:"Riocentro", meses:[8,9], ano:"impar", imp:"medio", quando:"2027: 29 de setembro a 1º de outubro", dado:"Feira nacional do turismo. No Riocentro nos anos ímpares, até 2031.", bloco:"ABAV Expo" },
+  { id:"febrava", nome:"FEBRAVA Rio", local:"Riocentro", meses:[9], ano:"todo", imp:"medio", quando:"2026: 6 a 8 de outubro", dado:"Feira de refrigeração e climatização.", bloco:"Feiras e congressos" },
+];
+
+/* ===== utilidades ===== */
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const fmt = (v, d = 0) => v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
 const brl = v => "R$ " + fmt(Math.round(v));
-const pct = (v, d = 0) => fmt(v * 100, d) + "%";
+const pct = (v, d = 1) => fmt(v * 100, d) + "%";
+const $ = id => document.getElementById(id);
 
-/* ---- números contando ---- */
 function countUp(el) {
   const to = +el.dataset.to, dec = +(el.dataset.dec || 0), pre = el.dataset.pre || "", suf = el.dataset.suf || "";
   if (reduce) return;
-  const t0 = performance.now(), dur = 1400;
+  const t0 = performance.now(), dur = 1500;
   const step = t => {
     const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
     el.textContent = pre + fmt(to * (0.35 + 0.65 * e), dec) + suf;
@@ -280,42 +493,94 @@ function countUp(el) {
 }
 document.querySelectorAll(".count").forEach(countUp);
 
-/* ---- ondas no hero: os três palcos ---- */
+/* ===== ondas no hero ===== */
 (function pulse() {
-  const c = document.getElementById("pulse"); if (!c) return;
+  const c = $("pulse"); if (!c) return;
   const ctx = c.getContext("2d");
-  const pts = [{ x: .78, y: .32, l: "Cidade do Rock" }, { x: .9, y: .62, l: "Riocentro" }, { x: .68, y: .7, l: "Farmasi Arena" }, { x: .82, y: .5, l: "Cidade Jardim", home: 1 }];
-  let w, h, dpr;
-  const size = () => { dpr = devicePixelRatio || 1; w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  const pts = [{ x:.78, y:.22, l:"Cidade do Rock" }, { x:.93, y:.58, l:"Riocentro" }, { x:.66, y:.66, l:"Farmasi Arena" }, { x:.6, y:.3, l:"Cidade das Artes" }, { x:.82, y:.44, l:"Cidade Jardim", home:1 }];
+  let w, h;
+  const size = () => { const dpr = devicePixelRatio || 1; w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
   size(); addEventListener("resize", size);
+  const home = pts[4];
   const draw = t => {
     ctx.clearRect(0, 0, w, h);
-    const narrow = w < 640;
+    const narrow = w < 700;
     pts.forEach((p, i) => {
       const x = p.x * w, y = p.y * h;
-      if (!p.home) for (let k = 0; k < 3; k++) {
-        const ph = ((t / 2600) + k / 3 + i * .17) % 1;
-        ctx.beginPath(); ctx.arc(x, y, 8 + ph * (narrow ? 70 : 120), 0, 7);
-        ctx.strokeStyle = `rgba(217,169,74,${(1 - ph) * .55})`; ctx.lineWidth = 1.5; ctx.stroke();
+      if (!p.home) {
+        ctx.beginPath(); ctx.moveTo(home.x * w, home.y * h); ctx.lineTo(x, y);
+        ctx.strokeStyle = "rgba(217,169,74,.18)"; ctx.setLineDash([3, 5]); ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+        for (let k = 0; k < 3; k++) {
+          const ph = ((t / 2800) + k / 3 + i * .19) % 1;
+          ctx.beginPath(); ctx.arc(x, y, 8 + ph * (narrow ? 60 : 110), 0, 7);
+          ctx.strokeStyle = `rgba(217,169,74,${(1 - ph) * .5})`; ctx.lineWidth = 1.5; ctx.stroke();
+        }
       }
-      ctx.beginPath(); ctx.arc(x, y, p.home ? 6 : 4.5, 0, 7);
+      ctx.beginPath(); ctx.arc(x, y, p.home ? 7 : 4.5, 0, 7);
       ctx.fillStyle = p.home ? "#FFFFFF" : "#D9A94A"; ctx.fill();
-      if (!narrow) { ctx.font = "500 12px Poppins, sans-serif"; ctx.fillStyle = "rgba(238,243,238,.85)"; ctx.fillText(p.l, x + 10, y + 4); }
+      if (!narrow) { ctx.font = `${p.home ? 600 : 500} 13px Poppins, sans-serif`; ctx.fillStyle = "rgba(238,243,238,.88)"; ctx.fillText(p.l, x + 11, y + 4); }
     });
     if (!reduce) requestAnimationFrame(draw);
   };
   requestAnimationFrame(draw);
 })();
 
-/* ---- gráficos ---- */
+/* ===== calendário interativo ===== */
+let anoCal = "par", eventoSel = "rir";
+function renderCal(animate) {
+  const ms = mensal(CEN.Base, anoCal).map(m => m.pico + m.norm);
+  const max = Math.max(...ms);
+  const box = $("months");
+  box.innerHTML = "";
+  MESES_L.forEach((nome, i) => {
+    const evs = EVENTOS.filter(e => e.meses.includes(i) && (e.ano === "todo" || e.ano === anoCal));
+    const el = document.createElement("div");
+    el.className = "month" + (ms[i] / max > .72 ? " hot" : "") + (animate && !reduce ? " pre" : "");
+    el.innerHTML = `<div class="mtop"><b>${nome}</b><small>${brl(ms[i])}</small></div>
+      <div class="heat" title="Receita esperada no mês"><i></i></div>
+      <div class="chips">${evs.map(e => `<button type="button" class="chip ${e.imp}" data-id="${e.id}" aria-pressed="${e.id === eventoSel}">${e.nome}</button>`).join("") || `<span style="font-size:14px;opacity:.6">Dias comuns</span>`}</div>`;
+    box.appendChild(el);
+    const bar = el.querySelector(".heat i");
+    const go = () => { bar.style.width = (ms[i] / max * 100).toFixed(1) + "%"; el.classList.remove("pre"); };
+    if (animate && !reduce) setTimeout(go, 60 + i * 55); else go();
+  });
+  box.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => { eventoSel = b.dataset.id; renderCal(false); renderDetail(); }));
+}
+function renderDetail() {
+  const e = EVENTOS.find(x => x.id === eventoSel);
+  const b = BLOCOS.find(x => x.nome === e.bloco);
+  const c = CEN.Base, m = 1 + (b.m - 1) * c.aM, diaria = c.adr * m, o = Math.min(.98, b.o + c.aO);
+  const anoTxt = e.ano === "par" ? "Anos pares" : e.ano === "impar" ? "Anos ímpares" : "Todo ano";
+  $("detail").innerHTML = `<div>
+      <div class="eyebrow" style="margin-bottom:6px">${anoTxt} · ${e.meses.map(i => MESES[i]).join(", ")}</div>
+      <h3>${e.nome}</h3><div class="where">${e.local}</div>
+      <p style="margin-top:12px">${e.dado}</p>
+    </div>
+    <dl>
+      <div><dt>Quando</dt><dd>${e.quando}</dd></div>
+      <div><dt>Diária estimada do studio</dt><dd><span class="fx"><b>${brl(diaria)}</b><span style="opacity:.8">${fmt(m, 2).replace(/,?0+$/, "")}x a diária comum</span></span></dd></div>
+      <div><dt>Ocupação estimada</dt><dd>${pct(o, 0)} das noites</dd></div>
+    </dl>`;
+}
+$("segAno").addEventListener("click", ev => {
+  const btn = ev.target.closest("button"); if (!btn) return;
+  anoCal = btn.dataset.v;
+  $("segAno").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  const sel = EVENTOS.find(x => x.id === eventoSel);
+  if (sel.ano !== "todo" && sel.ano !== anoCal) eventoSel = anoCal === "par" ? "rir" : "bienal";
+  renderCal(true); renderDetail();
+});
+
+/* ===== gráficos ===== */
 let charts = [];
+let narrow = innerWidth < 640;
 function theme() {
-  return { fg: css("--fg"), muted: css("--muted"), line: css("--line"), green: css("--green"), gold: css("--gold"),
-           purple: css("--purple"), soft: css("--soft"), cost: css("--cost"), surface: css("--surface") };
+  return { fg:css("--fg"), muted:css("--muted"), line:css("--line"), green:css("--green"), gold:css("--gold"),
+           purple:css("--purple"), soft:css("--soft"), cost:css("--cost"), surface:css("--surface") };
 }
 function base(T) {
   Chart.defaults.font.family = "Poppins, system-ui, sans-serif";
-  Chart.defaults.font.size = 14;
+  Chart.defaults.font.size = narrow ? 13 : 15;
   Chart.defaults.color = T.muted;
   if (reduce) Chart.defaults.animation = false; else { Chart.defaults.animation.duration = 1300; Chart.defaults.animation.easing = "easeOutQuart"; }
   Chart.defaults.plugins.legend.labels.boxWidth = 12;
@@ -325,124 +590,194 @@ function base(T) {
   Chart.defaults.plugins.tooltip.padding = 10;
   Chart.defaults.plugins.tooltip.cornerRadius = 8;
 }
-// rótulos de valor na ponta das barras
-const valueLabels = { id: "vl", afterDatasetsDraw(ch, _a, o) {
+const valueLabels = { id:"vl", afterDatasetsDraw(ch, _a, o) {
   if (!o || !o.fmt) return;
-  const { ctx } = ch; ctx.save(); ctx.font = `500 ${narrow ? 11 : 13}px Poppins, sans-serif`; ctx.fillStyle = o.color;
+  const { ctx } = ch; ctx.save(); ctx.font = `600 ${narrow ? 12 : 14}px Poppins, sans-serif`; ctx.fillStyle = o.color;
   ch.data.datasets.forEach((ds, di) => { if (o.only != null && o.only !== di) return;
     ch.getDatasetMeta(di).data.forEach((b, i) => {
-      const v = o.total ? ch.data.datasets.reduce((s, d) => s + d.data[i], 0) : ds.data[i];
-      const p = b.getProps(["x", "y", "base"], true);
-      if (ch.options.indexAxis === "y") { ctx.textBaseline = "middle"; ctx.textAlign = "left"; ctx.fillText(o.fmt(v, i), p.x + 8, p.y); }
-      else { ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(o.fmt(v, i), p.x, (o.total ? Math.min(...ch.data.datasets.map((_, k) => ch.getDatasetMeta(k).data[i].y)) : p.y) - 6); }
-    }); });
-  ctx.restore(); } };
+      const v = ds.data[i]; if (v == null) return;
+      const raw = Array.isArray(v) ? v[1] - v[0] : v;
+      const txt = o.fmt(raw, i);
+      if (ch.options.indexAxis === "y") { ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(txt, b.x + 8, b.y); }
+      else { ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(txt, b.x, Math.min(b.y, b.base) - 6); }
+    });
+  }); ctx.restore();
+} };
+let cenMes = "Base", anoMes = "par";
 
-function hbar(id, labels, data, colors, fmtV, max) {
-  const T = theme();
-  return new Chart(document.getElementById(id), { type: "bar", plugins: [valueLabels],
-    data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 4, borderSkipped: "start", barPercentage: .7 }] },
-    options: { indexAxis: "y", maintainAspectRatio: false, layout: { padding: { right: 70 } },
-      scales: { x: { display: false, max }, y: { grid: { display: false }, border: { color: T.line }, ticks: { color: T.fg } } },
-      plugins: { legend: { display: false }, vl: { fmt: fmtV, color: T.fg }, tooltip: { callbacks: { label: c => " " + fmtV(c.raw) } } } } });
-}
-
-let cenMes = "Base";
-let narrow = innerWidth < 560;
-addEventListener("resize", () => { const n = innerWidth < 560; if (n !== narrow) { narrow = n; build(); } });
 function build() {
   charts.forEach(c => c.destroy()); charts = [];
+  narrow = innerWidth < 640;
   const T = theme(); base(T);
-  charts.push(hbar("cPublico", narrow ? ["Bienal 2025", "Rock in Rio", "ROG.e 2026", "ABAV Expo", "Farmasi Arena"] : ["Bienal do Livro 2025", "Rock in Rio 2026", "ROG.e 2026", "ABAV Expo 2025", "Show na Farmasi Arena"],
-    [740000, 700000, 83000, 42000, 18000], T.green, v => fmt(v), 850000));
-  const donut = (id, v) => new Chart(document.getElementById(id), { type: "doughnut",
-    data: { labels: ["De fora do RJ", "Do RJ"], datasets: [{ data: [v, 100 - v], backgroundColor: [T.green, T.line], borderColor: T.surface, borderWidth: 3 }] },
-    options: { maintainAspectRatio: false, cutout: "74%", rotation: 0, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.label}: ${c.raw}%` } } },
-      animation: reduce ? false : { animateRotate: true, duration: 1600, easing: "easeOutQuart" } } });
-  charts.push(donut("dRir", 49), donut("dRog", 44));
-  charts.push(hbar("cOcup", narrow ? ["Carnaval 26", "Réveillon 25/26", "Rock in Rio 24", "Rock in Rio 26*"] : ["Carnaval 2026", "Réveillon 2025/26", "Rock in Rio 2024", "Rock in Rio 2026 (1ª etapa)"],
-    [99.02, 90.58, 88, 77.6], T.green, v => ({ 99.02: "99,02%", 90.58: "90,58%", 88: "88%", 77.6: "77,6%" })[v], 100));
-  charts.push(new Chart(document.getElementById("cTur"), { type: "bar", plugins: [valueLabels],
-    data: { labels: ["2024", "2025"], datasets: [{ data: [1528133, 2196443], backgroundColor: [T.soft, T.green], borderRadius: 4, barPercentage: .55 }] },
-    options: { maintainAspectRatio: false, layout: { padding: { top: 26 } }, scales: { y: { display: false, beginAtZero: true }, x: { grid: { display: false }, border: { color: T.line }, ticks: { color: T.fg } } },
-      plugins: { legend: { display: false }, vl: { fmt: v => fmt(v), color: T.fg }, tooltip: { callbacks: { label: c => " " + fmt(c.raw) + " turistas" } } } } }));
-  const b = calc(CENARIOS.Base);
-  charts.push(hbar("cAirbnb", ["Barra · 12 meses", "Cidade do Rio", "Barra · verão", "Jacarepaguá", narrow ? "Este estudo" : "Modelo deste estudo"],
-    [63, 62, 61, 52, Math.round(b.occ * 100)], [T.soft, T.soft, T.soft, T.soft, T.gold], v => v + "%", 100));
-  // mensal
-  const m = mensal(CENARIOS[cenMes]);
-  charts.push(new Chart(document.getElementById("cMes"), { type: "bar", plugins: [valueLabels],
-    data: { labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"], datasets: [
-      { label: "Dias comuns", data: m.map(x => Math.round(x.norm)), backgroundColor: T.soft, borderColor: T.surface, borderWidth: { top: 2 }, stack: "s" },
-      { label: "Picos e eventos", data: m.map(x => Math.round(x.pico)), backgroundColor: T.gold, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false, stack: "s" }] },
-    options: { maintainAspectRatio: false, layout: { padding: { top: 22 } },
-      scales: { x: { stacked: true, grid: { display: false }, border: { color: T.line }, ticks: { color: T.fg } }, y: { stacked: true, display: false, max: 10500 } },
-      plugins: { legend: { position: "top", align: "start", labels: { color: T.fg } }, vl: { total: true, only: 1, fmt: v => narrow ? fmt(v / 1000) + "k" : fmt(v / 1000, 1) + "k", color: T.fg },
-        tooltip: { mode: "index", intersect: false, callbacks: { label: c => ` ${c.dataset.label}: ${brl(c.raw)}`, footer: it => "Total: " + brl(it.reduce((s, x) => s + x.raw, 0)) } } } } }));
+  const grid = { color: T.line }, noGrid = { display: false };
+
+  charts.push(new Chart($("cPublico"), {
+    type: "bar",
+    data: { labels: ["Bienal do Livro", "Rock in Rio", "ROG.e", "Rio2C", "ABAV Expo", "Show na Farmasi"],
+      datasets: [{ data: [740000, 700000, 83000, 55000, 40000, 18768], backgroundColor: [T.gold, T.gold, T.green, T.purple, T.green, T.soft], borderRadius: 6, barThickness: narrow ? 22 : 28 }] },
+    options: { indexAxis: "y", maintainAspectRatio: false, layout: { padding: { right: narrow ? 70 : 90 } },
+      plugins: { legend: { display: false }, vl: { fmt: v => v >= 1e5 ? fmt(v / 1000) + " mil" : fmt(v / 1000, 1).replace(",0", "") + " mil", color: T.fg },
+        tooltip: { callbacks: { label: c => fmt(c.raw) + " pessoas" } } },
+      scales: { x: { display: false, max: 800000 }, y: { grid: noGrid, ticks: { color: T.fg } } } },
+    plugins: [valueLabels] }));
+
+  const donut = (id, v) => charts.push(new Chart($(id), { type: "doughnut",
+    data: { labels: ["De fora do RJ", "Do RJ"], datasets: [{ data: [v, 100 - v], backgroundColor: [T.gold, T.line], borderWidth: 0 }] },
+    options: { maintainAspectRatio: false, cutout: "72%", plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ": " + c.raw + "%" } } } } }));
+  donut("dRir", 50); donut("dRog", 44);
+
+  charts.push(new Chart($("cOcup"), { type: "bar",
+    data: { labels: ["Carnaval 2026", "Réveillon 25/26", "Rock in Rio 2024", "Rock in Rio 2026*"],
+      datasets: [{ data: [99.02, 90.58, 88, 77.6], backgroundColor: [T.gold, T.gold, T.green, T.green], borderRadius: 6 }] },
+    options: { maintainAspectRatio: false, plugins: { legend: { display: false }, vl: { fmt: v => fmt(v, 1) + "%", color: T.fg } },
+      scales: { y: { min: 0, max: 110, grid, ticks: { callback: v => v <= 100 ? v + "%" : "" } }, x: { grid: noGrid, ticks: { color: T.fg, maxRotation: 0, autoSkip: false, font: { size: narrow ? 11 : 14 } } } } },
+    plugins: [valueLabels] }));
+
+  charts.push(new Chart($("cTur"), { type: "bar",
+    data: { labels: ["2024", "2025"], datasets: [{ data: [1528133, 2196443], backgroundColor: [T.soft, T.gold], borderRadius: 6, barThickness: 70 }] },
+    options: { maintainAspectRatio: false, plugins: { legend: { display: false }, vl: { fmt: v => fmt(v / 1e6, 2) + " mi", color: T.fg } },
+      scales: { y: { min: 0, max: 2600000, grid, ticks: { callback: v => fmt(v / 1e6, 1) + " mi" } }, x: { grid: noGrid, ticks: { color: T.fg } } } },
+    plugins: [valueLabels] }));
+
+  buildMes(T);
+
   // cascata
-  const steps = [["Receita", b.receita], ["Gestão", -b.gestao], ["Plataforma", -b.plataforma], ["Manutenção", -b.manut], ["Condomínio+IPTU", -9000], ["Contas", -4200]];
+  const r = calc(CEN.Base, "media");
+  const steps = [["Receita bruta", r.rec, "rec"], ["Gestora 20%", -r.g], ["Plataforma", -r.p], ["Manutenção", -r.mt], ["Condomínio e IPTU", -r.fx], ["Luz e internet", -r.ct], ["Líquido", r.liq, "liq"]];
   let acc = 0; const bars = [], cols = [];
-  steps.forEach(([l, v], i) => { if (!i) { bars.push([0, v]); acc = v; cols.push(T.soft); } else { bars.push([acc + v, acc]); acc += v; cols.push(T.cost); } });
-  bars.push([0, acc]); cols.push(T.green);
-  const valsC = steps.map(s => s[1]).concat([acc]);
-  charts.push(new Chart(document.getElementById("cCasc"), { type: "bar",
-    plugins: [{ id: "cl", afterDatasetsDraw(ch) { const { ctx } = ch; ctx.save(); ctx.font = `500 ${narrow ? 10 : 12}px Poppins, sans-serif`; ctx.fillStyle = T.fg; ctx.textAlign = "center";
-      ch.getDatasetMeta(0).data.forEach((r, i) => { const v = valsC[i]; ctx.fillText((v < 0 ? "−" : "") + (narrow ? fmt(Math.abs(v) / 1000, 1) + "k" : fmt(Math.abs(Math.round(v)))), r.x, Math.min(r.y, r.base) - 6); }); ctx.restore(); } }],
-    data: { labels: steps.map(s => s[0]).concat(["Líquido"]), datasets: [{ data: bars, backgroundColor: cols, borderRadius: 4, borderSkipped: false, barPercentage: .7 }] },
-    options: { maintainAspectRatio: false, layout: { padding: { top: 22 } },
-      scales: { y: { display: false, beginAtZero: true }, x: { grid: { display: false }, border: { color: T.line }, ticks: { color: T.fg, font: { size: narrow ? 10 : 11 }, maxRotation: 50, minRotation: narrow ? 50 : 0 } } },
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => " " + (valsC[c.dataIndex] < 0 ? "− " : "") + brl(Math.abs(valsC[c.dataIndex])) } } } } }));
+  steps.forEach(([_, v, k]) => {
+    if (k === "rec") { bars.push([0, v]); acc = v; cols.push(T.soft); }
+    else if (k === "liq") { bars.push([0, v]); cols.push(T.gold); }
+    else { bars.push([acc + v, acc]); acc += v; cols.push(T.cost); }
+  });
+  charts.push(new Chart($("cCasc"), { type: "bar",
+    data: { labels: steps.map(s => s[0]), datasets: [{ data: bars, backgroundColor: cols, borderRadius: 4 }] },
+    options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+      vl: { fmt: (v, i) => (i > 0 && i < 6 ? "−" : "") + fmt(Math.round(v / 100) / 10, 1) + " mil", color: T.fg },
+      tooltip: { callbacks: { label: c => brl(c.raw[1] - c.raw[0]) } } },
+      scales: { y: { min: 0, max: 90000, grid, ticks: { callback: v => fmt(v / 1000) + " mil" } },
+        x: { grid: noGrid, ticks: { color: T.fg, maxRotation: narrow ? 60 : 30, minRotation: narrow ? 60 : 0, autoSkip: false, font: { size: narrow ? 11 : 13 } } } } },
+    plugins: [valueLabels] }));
+
   // acumulado
-  const anos = Array.from({ length: 10 }, (_, i) => i + 1);
-  const serie = (k) => { let a = 0; return anos.map(n => (a += calc(CENARIOS[k], n % 2 === 0).liq)); };
-  const ds = [["Conservador", T.green], ["Base", T.gold], ["Otimista", T.purple]].map(([k, c]) => ({ label: k, data: serie(k).map(Math.round), borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 3, pointHoverRadius: 6, tension: .25 }));
-  charts.push(new Chart(document.getElementById("cAcum"), { type: "line", data: { labels: anos.map(a => "Ano " + a), datasets: ds },
+  const anos = Array.from({ length: 10 }, (_, i) => "Ano " + (i + 1));
+  const ac = n => Array.from({ length: 10 }, (_, i) => calc(CEN[n]).liq * (i + 1));
+  const inv = investDe(365000);
+  charts.push(new Chart($("cAcum"), { type: "line",
+    data: { labels: anos, datasets: [
+      { label: "Otimista", data: ac("Otimista"), borderColor: T.purple, backgroundColor: T.purple, tension: .25, pointRadius: 0, borderWidth: 3 },
+      { label: "Base", data: ac("Base"), borderColor: T.gold, backgroundColor: T.gold, tension: .25, pointRadius: 0, borderWidth: 4 },
+      { label: "Conservador", data: ac("Conservador"), borderColor: T.green, backgroundColor: T.green, tension: .25, pointRadius: 0, borderWidth: 3 },
+      { label: "Investimento", data: anos.map(() => inv), borderColor: T.muted, borderDash: [6, 5], pointRadius: 0, borderWidth: 2 } ] },
     options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-      animation: reduce ? false : { x: { type: "number", easing: "linear", duration: 120, from: NaN, delay: c => c.type === "data" ? c.index * 120 + c.datasetIndex * 60 : 0 }, y: { duration: 0 } },
-      scales: { y: { grid: { color: T.line }, border: { display: false }, ticks: { callback: v => fmt(v / 1000) + " mil" } }, x: { grid: { display: false }, ticks: { color: T.fg, autoSkip: true, maxTicksLimit: 5 } } },
-      plugins: { legend: { position: "top", align: "start", labels: { color: T.fg } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${brl(c.raw)}` } } } } }));
+      plugins: { legend: { position: "bottom" }, tooltip: { callbacks: { label: c => c.dataset.label + ": " + brl(c.raw) } } },
+      scales: { y: { min: 0, max: 600000, grid, ticks: { callback: v => fmt(v / 1000) + " mil" } }, x: { grid: noGrid, ticks: { maxRotation: 0, autoSkip: true } } } } }));
 }
 
-/* ---- simulador ---- */
-const $ = id => document.getElementById(id);
-let rir = true;
+let mesChart = null;
+function buildMes(T) {
+  T = T || theme();
+  if (mesChart) { charts = charts.filter(c => c !== mesChart); mesChart.destroy(); }
+  const ms = mensal(CEN[cenMes], anoMes);
+  mesChart = new Chart($("cMes"), { type: "bar",
+    data: { labels: MESES, datasets: [
+      { label: "Dias comuns", data: ms.map(m => Math.round(m.norm)), backgroundColor: T.soft, borderRadius: 4, stack: "s" },
+      { label: "Eventos e temporada", data: ms.map(m => Math.round(m.pico)), backgroundColor: T.gold, borderRadius: 4, stack: "s" } ] },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+      plugins: { legend: { position: "bottom" }, tooltip: { callbacks: { label: c => c.dataset.label + ": " + brl(c.raw), footer: it => "Total: " + brl(it.reduce((s, x) => s + x.raw, 0)) } } },
+      scales: { y: { stacked: true, min: 0, max: 16000, grid: { color: T.line }, ticks: { callback: v => fmt(v / 1000) + " mil" } }, x: { stacked: true, grid: { display: false }, ticks: { autoSkip: false, maxRotation: 0, font: { size: narrow ? 11 : 14 } } } } } });
+  charts.push(mesChart);
+  const r = calc(CEN[cenMes], anoMes);
+  $("sazLead").textContent = `No cenário ${cenMes}, em ano ${anoMes === "par" ? "par" : "ímpar"}, as noites de evento e alta temporada geram ${pct(r.recPico / r.rec, 0)} da receita bruta do ano. Setembro rivaliza com o verão.`;
+}
+const segBind = (id, fn) => $(id).addEventListener("click", ev => {
+  const btn = ev.target.closest("button"); if (!btn) return;
+  $(id).querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === btn)); fn(btn.dataset.v);
+});
+segBind("segMes", v => { cenMes = v; buildMes(); });
+segBind("segMesAno", v => { anoMes = v; buildMes(); });
+
+/* ===== comparação ===== */
+function renderCompare(animate) {
+  const rows = [["Aluguel tradicional", ALUGUEL_TRAD, "var(--muted)"],
+    ["Conservador", calc(CEN.Conservador).mesLiq, "var(--green)"],
+    ["Base", calc(CEN.Base).mesLiq, "var(--gold)"],
+    ["Otimista", calc(CEN.Otimista).mesLiq, "var(--purple)"]];
+  const max = 5500;
+  $("compare").innerHTML = rows.map(([n, v, c]) => `<div class="bar"><span>${n}</span><div class="track"><i style="background:${c}" data-w="${(v / max * 100).toFixed(1)}"></i></div><b>${brl(v)}</b></div>`).join("");
+  const set = () => $("compare").querySelectorAll("i").forEach(i => i.style.width = i.dataset.w + "%");
+  if (animate && !reduce) setTimeout(set, 150); else set();
+}
+
+
+/* ===== noites alugadas ===== */
+let adrN = 430, gN = .20;
+const NIVEIS = [10, 15, 20, 25, 30];
+const FIXOS = UNID.studio.condo + UNID.studio.contas;
+const liqN = (n, adr, g) => n * adr * (1 - g - PLAT - MANUT) - FIXOS;
+function renderNights(animate) {
+  const rb = calc(CEN.Base), baseN = rb.noites / 12;
+  const vals = NIVEIS.map(n => ({ n, br: n * adrN, liq: liqN(n, adrN, gN) }));
+  const max = liqN(30, 470, 0);
+  const near = NIVEIS.reduce((a, b) => Math.abs(b - baseN) < Math.abs(a - baseN) ? b : a);
+  $("nights").innerHTML = vals.map(v => `<div class="night${v.n === near ? " base" : ""}">${v.n === near ? '<span class="tag">Perto do Base</span>' : ""}
+      <div class="nn">${v.n}<small>noites</small></div>
+      <div class="oc">${Math.round(v.n / 30 * 100)}% do mês alugado</div>
+      <div><div class="lb">Líquido por mês</div><div class="liq">${brl(v.liq)}</div></div>
+      <div class="br"><span class="lb">Bruto </span>${brl(v.br)}</div>
+      <div class="vbar"><i data-w="${Math.max(0, v.liq / max * 100).toFixed(1)}"></i></div></div>`).join("");
+  const set = () => $("nights").querySelectorAll(".vbar i").forEach(i => i.style.width = i.dataset.w + "%");
+  if (animate && !reduce) setTimeout(set, 120); else set();
+  $("nightsNote").textContent = `Diária média de ${brl(adrN)} em todas as noites alugadas. Desconta ${gN ? "gestora de 20%, " : ""}plataforma de 3%, manutenção de 4% e ${brl(FIXOS)} fixos por mês (condomínio, IPTU, luz e internet). No cenário Base do estudo, a diária média do ano é ${brl(rb.adr)} e o studio fica alugado cerca de ${fmt(baseN, 1)} noites por mês.`;
+  renderTabela();
+}
+segBind("segDiaria", v => { adrN = +v; renderNights(true); });
+segBind("segGestN", v => { gN = +v; renderNights(true); });
+function renderTabela() {
+  const diarias = [336, 380, 430, 470];
+  $("tUnid").innerHTML = `<thead><tr><th>Diária média</th>${NIVEIS.map(n => `<th>${n} noites</th>`).join("")}</tr></thead><tbody>${diarias.map(d => `<tr${d === adrN ? ' style="background:var(--surface2)"' : ""}><td><b>${brl(d)}</b></td>${NIVEIS.map(n => `<td class="n">${brl(liqN(n, d, gN))}</td>`).join("")}</tr>`).join("")}</tbody>`;
+  $("tUnidNote").textContent = `${gN ? "Com gestora de 20%." : "Em autogestão."} Referência de mercado: a diária mediana do Airbnb na Barra da Tijuca é de R$ 382, considerando imóveis de todos os tamanhos (GuestFavorites, 2026). Diárias de R$ 430 a R$ 470 já são praticadas por flats da região em dias comuns, e pedem um studio bem decorado, bem avaliado e com preço alto nas datas de evento.`;
+}
+/* ===== simulador ===== */
+let gest = .20, anoSim = "media", uSim = UNID.studio;
 function sim() {
-  const adr = +$("sAdr").value, occ = +$("sOcc").value / 100, inv = +$("sInv").value;
-  const r = calc({ adr, occ, aO: 0, aM: 1 }, rir, inv);
-  $("oAdr").textContent = brl(adr); $("oOcc").textContent = Math.round(occ * 100) + "%"; $("oInv").textContent = brl(inv);
-  $("rMes").textContent = brl(r.mensal); $("rYield").textContent = pct(r.yield, 1); $("rRec").textContent = brl(r.receita);
-  $("rOcc").textContent = pct(r.occ); $("rAdr").textContent = brl(r.adr); $("rLiq").textContent = brl(r.liq);
-  $("rBar").style.width = Math.max(0, Math.min(100, r.yield / 0.15 * 100)) + "%";
+  const preco = +$("sPreco").value, adr = +$("sAdr").value, occ = +$("sOcc").value / 100;
+  $("oPreco").textContent = brl(preco); $("oAdr").textContent = brl(adr); $("oOcc").textContent = Math.round(occ * 100) + "%";
+  const c = { adr, occ, aO: CEN.Base.aO + (occ - CEN.Base.occ) * .5, aM: 1 };
+  const r = calc(c, anoSim, gest, preco, uSim);
+  $("rMes").textContent = brl(r.mesLiq);
+  $("rBruto").textContent = brl(r.mesBruto);
+  $("rYield").textContent = pct(r.yield);
+  $("rInv").textContent = brl(r.inv);
+  $("rPay").textContent = r.liq > 0 ? fmt(r.payback, 1) + " anos" : "não se paga";
+  $("rOcc").textContent = pct(r.occ);
+  $("rAdrM").textContent = brl(r.adr);
+  $("rX").textContent = fmt(r.mesLiq / ALUGUEL_TRAD, 1) + "x";
+  $("rBar").style.width = Math.max(0, Math.min(100, r.mesLiq / 8000 * 100)) + "%";
+  $("rRef").style.left = (ALUGUEL_TRAD / 8000 * 100) + "%";
 }
-["sAdr", "sOcc", "sInv"].forEach(id => $(id).addEventListener("input", sim));
-function seg(groupId, fn) {
-  $(groupId).addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
-    $(groupId).querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); });
-}
-seg("segRir", v => { rir = v === "1"; sim(); });
-seg("segMes", v => { cenMes = v; const ch = charts.find(c => c.canvas.id === "cMes"); const m = mensal(CENARIOS[v]);
-  ch.data.datasets[0].data = m.map(x => Math.round(x.norm)); ch.data.datasets[1].data = m.map(x => Math.round(x.pico)); ch.update(); });
+["sPreco", "sAdr", "sOcc"].forEach(id => $(id).addEventListener("input", sim));
+segBind("segGest", v => { gest = +v; sim(); });
+segBind("segRir", v => { anoSim = v; sim(); });
 
-/* ---- reaparecer ao rolar: gráficos reanimam quando entram na tela ---- */
+
+/* ===== entrada animada ===== */
 function observe() {
   if (reduce || !("IntersectionObserver" in window)) return;
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.remove("pre");
-    e.target.querySelectorAll("canvas").forEach(cv => { const ch = charts.find(c => c.canvas === cv); if (ch) { ch.reset(); ch.update(); } });
-    io.unobserve(e.target);
-  }), { threshold: .25 });
-  document.querySelectorAll(".reveal").forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top > innerHeight) { el.classList.add("pre"); io.observe(el); }
-  });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => { const r = el.getBoundingClientRect(); if (r.top > innerHeight) { el.classList.add("pre"); io.observe(el); } });
+  const cal = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { renderCal(true); cal.disconnect(); } }), { threshold: .15 });
+  const m = $("months"); if (m.getBoundingClientRect().top > innerHeight) cal.observe(m);
+  const cmp = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { renderCompare(true); cmp.disconnect(); } }), { threshold: .3 });
+  const cp = $("compare"); if (cp.getBoundingClientRect().top > innerHeight) cmp.observe(cp);
 }
 
-function start() { build(); sim(); observe(); }
+renderCal(false); renderDetail(); renderCompare(false); renderNights(false); sim();
+function start() { build(); observe(); }
 if (window.Chart) start(); else addEventListener("load", start);
-const mq = matchMedia("(prefers-color-scheme: dark)");
-mq.addEventListener?.("change", build);
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if ((innerWidth < 640) !== narrow) build(); }, 250); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", build);
 new MutationObserver(build).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 </script>
 
-</body></html>
+</html>
