@@ -6,30 +6,33 @@
 <meta name="description" content="Estudo de rentabilidade de um studio no Cidade Jardim (Barra Olímpica) em locação por temporada, com calendário de eventos e simulador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Albert+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: coluna editorial única; faixas verdes (hero, calendário, simulador) alternam com chão claro; gráficos em cartões largos */
+/* Layout: coluna editorial única na identidade On Resort; faixas amadeiradas (hero, calendário, simulador) alternam com fundo travertino; arcos finos e pílulas como motivo */
 :root{
-  --bg:#F2F4EF; --surface:#FFFFFF; --surface2:#E8EDE6; --band:#1C3528; --band2:#24402F; --band-fg:#EEF3EE;
-  --fg:#17271F; --muted:#56635B; --line:#D7DED5;
-  --gold:#B57E16; --gold-hi:#D9A94A; --green:#2F8A5A; --purple:#7D5BC0; --soft:#9DB5A3; --cost:#C2694A;
-  --display:"Bricolage Grotesque","Poppins",system-ui,sans-serif;
-  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#F1EAE0; --surface:#FBF7F1; --surface2:#EAE0D3; --band:#633925; --band2:#4A3322; --band-fg:#F6EEE4;
+  --fg:#3D332B; --muted:#76665A; --line:#E0D4C4;
+  --gold:#9A6A3E; --gold-hi:#D8B48A; --green:#6E949A; --purple:#633925; --soft:#C9B8A3; --cost:#B5603E;
+  --display:"Urbanist","Albert Sans",system-ui,sans-serif;
+  --body:"Albert Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1A14; --surface:#16251C; --surface2:#1B2D22; --band:#0B140F; --band2:#132219; --band-fg:#E3ECE5;
-  --fg:#E7EEE9; --muted:#9DAAA1; --line:#26382D;
-  --gold:#D9A94A; --gold-hi:#E2B65C; --green:#3FA36E; --purple:#9A80DE; --soft:#5E7D68; --cost:#D67C5C; color-scheme:dark}}
+  --bg:#1C1713; --surface:#26201A; --surface2:#2F2720; --band:#3A2418; --band2:#2C1B12; --band-fg:#F1E7DB;
+  --fg:#F1E7DB; --muted:#B3A391; --line:#3B3128;
+  --gold:#D3A774; --gold-hi:#E2C09A; --green:#8DB3B8; --purple:#C98F66; --soft:#6E6052; --cost:#D07A58; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1A14; --surface:#16251C; --surface2:#1B2D22; --band:#0B140F; --band2:#132219; --band-fg:#E3ECE5;
-  --fg:#E7EEE9; --muted:#9DAAA1; --line:#26382D;
-  --gold:#D9A94A; --gold-hi:#E2B65C; --green:#3FA36E; --purple:#9A80DE; --soft:#5E7D68; --cost:#D67C5C; color-scheme:dark}
+  --bg:#1C1713; --surface:#26201A; --surface2:#2F2720; --band:#3A2418; --band2:#2C1B12; --band-fg:#F1E7DB;
+  --fg:#F1E7DB; --muted:#B3A391; --line:#3B3128;
+  --gold:#D3A774; --gold-hi:#E2C09A; --green:#8DB3B8; --purple:#C98F66; --soft:#6E6052; --cost:#D07A58; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background-color:var(--bg);background-image:radial-gradient(120% 60% at 0% 0%,rgba(255,255,255,.35),transparent 60%),radial-gradient(90% 50% at 100% 40%,rgba(154,106,62,.06),transparent 70%);color:var(--fg);font-family:var(--body);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 section{padding-block:60px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
-h2{font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.015em}
+h2{font-size:clamp(26px,4.2vw,40px);font-weight:700;letter-spacing:.035em;text-transform:uppercase;color:var(--band)}
+.band h2{color:var(--band-fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h2{color:var(--gold-hi)}}
+:root[data-theme="dark"] h2{color:var(--gold-hi)}
 h3{font-size:21px;font-weight:600;font-family:var(--body);line-height:1.3}
 p{margin:0;max-width:64ch}
 .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
@@ -43,9 +46,13 @@ p{margin:0;max-width:64ch}
 .hero{position:relative;overflow:hidden;padding-block:64px 52px}
 .hero canvas#pulse{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none}
 .hero .wrap{position:relative}
-.hero h1{font-size:clamp(48px,10vw,104px);font-weight:800;letter-spacing:-.03em}
+.hero h1{font-size:clamp(46px,9.5vw,100px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.25em;flex-wrap:wrap}
+.hero h1 .tog{display:inline-block;width:1.25em;height:.62em;border-radius:999px;background:var(--band-fg);position:relative;flex:none}
+.hero h1 .tog::after{content:"";position:absolute;right:.08em;top:.08em;width:.46em;height:.46em;border-radius:50%;background:var(--gold)}
+.hero .cj{font-family:var(--display);font-size:clamp(15px,2vw,19px);letter-spacing:.32em;text-transform:uppercase;opacity:.85;margin-top:8px}
+.hero .sub em{font-style:italic;font-family:var(--display);font-weight:600}
 .hero .sub{font-size:clamp(20px,3vw,26px);margin-top:10px;opacity:.88;max-width:34ch}
-.price{display:inline-flex;align-items:baseline;gap:10px;margin-top:22px;padding:10px 18px;border:1px solid rgba(217,169,74,.55);border-radius:999px;font-size:17px}
+.price{display:inline-flex;align-items:baseline;gap:10px;margin-top:22px;padding:10px 18px;border:1px solid rgba(216,180,138,.55);border-radius:999px;font-size:17px}
 .price b{font-family:var(--display);font-size:24px;color:var(--gold-hi);font-weight:700}
 .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;margin-top:36px;background:rgba(255,255,255,.12);border-radius:16px;overflow:hidden}
 .kpi{background:var(--band);padding:22px 20px;min-width:0}
@@ -73,7 +80,7 @@ p{margin:0;max-width:64ch}
 .seg button:hover{border-color:var(--gold)}
 .seg button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600}
 .band .seg button{border-color:rgba(255,255,255,.3);color:var(--band-fg)}
-.band .seg button[aria-pressed="true"]{background:var(--gold-hi);border-color:var(--gold-hi);color:#1C3528}
+.band .seg button[aria-pressed="true"]{background:var(--gold-hi);border-color:var(--gold-hi);color:#3D2416}
 button:focus-visible,input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 
 /* calendário */
@@ -86,16 +93,16 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold-hi);outlin
 @media (max-width:380px){.months{grid-template-columns:1fr}}
 .month{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:10px;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,border-color .3s}
 .month.pre{transform:translateY(14px);opacity:.4}
-.month.hot{border-color:rgba(217,169,74,.6)}
+.month.hot{border-color:rgba(216,180,138,.6)}
 .mtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .mtop b{font-family:var(--display);font-size:22px;font-weight:700;color:#fff}
 .mtop small{font-size:14px;opacity:.8;font-variant-numeric:tabular-nums}
 .heat{height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
-.heat i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#5E9C76,var(--gold-hi));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.heat i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7A9EA3,var(--gold-hi));transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:14px;line-height:1.25;text-align:left;padding:6px 10px;border-radius:9px;cursor:pointer;border:1px solid transparent;color:var(--band-fg);background:rgba(255,255,255,.08);max-width:100%}
-.chip.alto{background:rgba(217,169,74,.2);border-color:rgba(217,169,74,.5);color:#fff;font-weight:500}
-.chip[aria-pressed="true"]{background:var(--gold-hi);color:#1C3528;border-color:var(--gold-hi)}
+.chip.alto{background:rgba(216,180,138,.2);border-color:rgba(216,180,138,.5);color:#fff;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--gold-hi);color:#3D2416;border-color:var(--gold-hi)}
 .chip:hover{border-color:var(--gold-hi)}
 .detail{margin-top:20px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px}
 @media (max-width:760px){.detail{grid-template-columns:1fr}}
@@ -188,13 +195,20 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .night .vbar{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:auto}
 .night .vbar i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
 
+.arc{position:relative;overflow:hidden}
+.arc>.wrap{position:relative;z-index:1}
+.arc::before{content:"";position:absolute;width:min(1100px,160vw);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;right:-55%;top:-260px;pointer-events:none}
+.band.arc::before{border-color:rgba(246,238,228,.14);left:-60%;right:auto}
+.price{background:rgba(246,238,228,.08)}
+.seg button{letter-spacing:.02em}
+.eyebrow{letter-spacing:.2em}
 /* ===== animações ===== */
 .progress{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:4px;z-index:30;pointer-events:none}
 .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--gold-hi));transform-origin:0 50%;transform:scaleX(0)}
 @keyframes rise{from{opacity:.05;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes pop{0%{opacity:.1;transform:translateY(18px) scale(.96)}100%{opacity:1;transform:none}}
 @keyframes shine{0%{background-position:-160% 0}100%{background-position:260% 0}}
-@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(217,169,74,.0)}50%{box-shadow:0 0 0 6px rgba(217,169,74,.18)}}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(216,180,138,.0)}50%{box-shadow:0 0 0 6px rgba(216,180,138,.18)}}
 .hero .wrap>*{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
 .hero .wrap>*:nth-child(1){animation-delay:.05s}.hero .wrap>*:nth-child(2){animation-delay:.15s}
 .hero .wrap>*:nth-child(3){animation-delay:.3s}.hero .wrap>*:nth-child(4){animation-delay:.45s}.hero .wrap>*:nth-child(5){animation-delay:.55s}
@@ -205,7 +219,7 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .price{animation-name:rise}
 .price b{display:inline-block}
 .date,.night,.month,.prod div,.kpi{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
-.date:hover,.night:hover,.prod div:hover{transform:translateY(-5px);box-shadow:0 14px 30px -14px rgba(23,39,31,.35)}
+.date:hover,.night:hover,.prod div:hover{transform:translateY(-5px);box-shadow:0 14px 30px -14px rgba(61,51,43,.35)}
 .month:hover{transform:translateY(-4px)}
 .date.peak{animation:breathe 3s ease-in-out infinite}
 .stag.pre>*{opacity:.15;transform:translateY(20px)}
@@ -225,9 +239,10 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <canvas id="pulse" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="eyebrow">Estudo de rentabilidade · outubro 2026</div>
-    <h1>On Resort</h1>
-    <p class="sub">Cidade Jardim, Barra Olímpica. Um studio no meio do eixo de eventos da Zona Oeste, feito para alugar por temporada.</p>
-    <div class="price">Studio a partir de <b>R$ 365 mil</b></div>
+    <h1><span class="tog" aria-hidden="true"></span>On Resort</h1>
+    <div class="cj">Cidade Jardim · Barra Olímpica</div>
+    <p class="sub">Um studio no meio do eixo de eventos da Zona Oeste, <em>feito para alugar por temporada.</em></p>
+    <div class="price">Studio a partir de <b>R$ 365 mil*</b></div>
     <div class="kpis">
       <div class="kpi main"><b class="count" data-to="3551" data-pre="R$ " data-thou="1">R$ 3.551</b><span>líquido por mês com gestora profissional (cenário Base)</span></div>
       <div class="kpi"><b class="count" data-to="6440" data-pre="R$ " data-thou="1">R$ 6.440</b><span>receita bruta média por mês</span></div>
@@ -240,7 +255,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 </header>
 
 <main>
-<section id="airbnb"><div class="wrap">
+<section id="airbnb" class="arc"><div class="wrap">
   <div class="eyebrow">Diárias reais no Airbnb</div>
   <h2 class="reveal">Quanto custa um studio na região em cada data</h2>
   <p class="lead">Preços reais de studios e apartamentos de 1 quarto inteiros na Barra Olímpica, coletados no Airbnb em 28 de outubro de 2026, para 2 hóspedes. O valor é o total pago pelo hóspede, já com limpeza e taxas, dividido pelas noites.</p>
@@ -257,15 +272,15 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   </div>
 </div></section>
 
-<section><div class="wrap">
+<section class="arc"><div class="wrap">
   <div class="eyebrow">Onde fica</div>
   <h2 class="reveal">No meio do eixo de eventos da Zona Oeste</h2>
   <p class="lead">O On Resort fica dentro do Cidade Jardim, o bairro planejado da Carvalho Hosken, cercado pelo Cinturão Verde. A poucos minutos estão a Cidade do Rock, o Riocentro, a Farmasi Arena e a Cidade das Artes. São os maiores geradores de demanda de hospedagem da região.</p>
   <div class="prod stag">
-    <div><b>1.306</b><span>unidades em 3 blocos, da RJZ Cyrela e Leblon Realty</span></div>
-    <div><b>32 m²</b><span>studios do bloco Polinésia</span></div>
-    <div><b>Airbnb</b><span>projeto pensado para temporada, com parceria com o Airbnb</span></div>
-    <div><b>Charlie</b><span>gestão de locação, concierge, shuttle e serviços pay per use</span></div>
+    <div><b>1.306</b><span>unidades em 3 blocos, da RJZ Cyrela, num terreno de 14.576 m²</span></div>
+    <div><b>714</b><span>studios de 32 a 33 m², a tipologia mais numerosa do projeto</span></div>
+    <div><b>Airbnb</b><span>projeto Airbnb-friendly, desenvolvido com a colaboração do Airbnb</span></div>
+    <div><b>5 mil m²</b><span>de lazer, com concierge, daily cleaning, pool bar e shuttle</span></div>
   </div>
   <div class="card reveal">
     <h3>Público por evento</h3>
@@ -285,15 +300,15 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <h2 class="reveal">Hotéis cheios nos grandes eventos</h2>
   <div class="grid2">
     <div class="card reveal"><h3>Ocupação hoteleira média na cidade</h3>
-      <div class="chart"><canvas id="cOcup" role="img" aria-label="Carnaval 2026 99,02%, Réveillon 2025/26 90,58%, Rock in Rio 2024 88%, Rock in Rio 2026 primeira semana, previsão por reservas, 77,6%"></canvas></div>
-      <p class="note">Fonte: HotéisRIO. *Previsão pelas reservas feitas até 2/9 para a 1ª semana do festival. Na Barra, Recreio e São Conrado, o Carnaval 2026 chegou a 97,98%.</p></div>
+      <div class="chart"><canvas id="cOcup" role="img" aria-label="Carnaval 2026 99,02%, Réveillon 2025/26 90,58%, Rock in Rio 2024 88%, Rock in Rio 2026 85,79%"></canvas></div>
+      <p class="note">Fonte: HotéisRIO. Na Barra, Recreio e São Conrado, o Carnaval 2026 chegou a 97,98% e o Rock in Rio 2026, a 84,76%.</p></div>
     <div class="card reveal"><h3>Turistas estrangeiros no estado do Rio</h3>
       <div class="chart"><canvas id="cTur" role="img" aria-label="2024: 1.528.133; 2025: 2.196.443, alta de 43,7%"></canvas></div>
       <p class="note">Fonte: Embratur. Alta de 43,7% de um ano para o outro.</p></div>
   </div>
 </div></section>
 
-<section class="band" id="calendario"><div class="wrap">
+<section class="band arc" id="calendario"><div class="wrap">
   <div class="eyebrow">Calendário de eventos</div>
   <h2 class="reveal">Doze meses de demanda na porta</h2>
   <p class="lead">Os eventos da região se revezam: anos pares têm Rock in Rio e ROG.e, anos ímpares têm Bienal do Livro e LAAD. A barra de cada mês mostra a receita esperada do studio naquele mês, no cenário Base. Toque num evento para ver os detalhes.</p>
@@ -358,7 +373,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   </div>
 </div></section>
 
-<section class="band"><div class="wrap">
+<section class="band arc"><div class="wrap">
   <div class="eyebrow">Simulador</div>
   <h2 class="reveal">Faça a sua conta</h2>
   <p class="lead">Ajuste o preço da unidade, a diária e a ocupação dos dias comuns. Os eventos seguem as premissas do estudo.</p>
@@ -426,7 +441,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
   <div class="grid2">
     <div class="card reveal"><h3>Custos considerados</h3>
       <ul class="list">
-        <li><span>Gestora profissional: 20% da receita. O mercado cobra de 16% a 35%.</span></li>
+        <li><span>Gestora profissional: 20% da receita. As unidades podem ser administradas por empresas especializadas.</span></li>
         <li><span>Taxa da plataforma: 3%. Manutenção e reposição: 4%.</span></li>
         <li><span>Condomínio e IPTU: R$ 800 por mês. Luz, internet e streaming: R$ 350 por mês.</span></li>
         <li><span>Limpeza paga pelo hóspede, na taxa de limpeza de cada reserva.</span></li>
@@ -434,7 +449,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
       </ul></div>
     <div class="card reveal"><h3>Pontos de atenção</h3>
       <ul class="list">
-        <li><span>Confirmar na convenção do condomínio que a locação por temporada é permitida.</span></li>
+        <li><span>O site oficial confirma o uso para temporada; as regras finais ficam na Convenção de Condomínio.</span></li>
         <li><span>Há vários lançamentos de studios na Barra Olímpica, o que aumenta a concorrência.</span></li>
         <li><span>Mais da metade da receita vem dos picos; meses fracos pedem preço dinâmico.</span></li>
         <li><span>Valores antes do Imposto de Renda. Projeção, não garantia de rentabilidade.</span></li>
@@ -445,7 +460,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
 
 <footer><div class="wrap">
   <b style="color:var(--fg)">Strategic Marketing · fontes</b>
-  <p style="margin-top:6px">On Resort Cidade Jardim (RJZ Cyrela e Leblon Realty), Av. Vice-Presidente José Alencar, 1.305, Barra Olímpica. Projeção para o studio de 32 m² entregue, mobiliado e em operação. Preço de tabela informado: a partir de R$ 365 mil.</p>
+  <p style="margin-top:6px">On Resort Cidade Jardim (RJZ Cyrela), Av. Vice-Presidente José Alencar, 1305, Barra Olímpica. Projeção para o studio de 32 m² entregue, mobiliado e em operação. *A partir de R$ 365 mil: referente à unidade 202 do Ed. Polinésia, preço válido para o mês do lançamento e sujeito a disponibilidade (site oficial). Serviços e facilidades do empreendimento têm caráter preliminar e seguem o Memorial de Incorporação e a Convenção de Condomínio.</p>
   <ul>
     <li>GuestFavorites: Airbnb na Barra da Tijuca, 2026</li>
     <li>HostnJoy: receita e custos de gestão no Rio, 2026</li>
@@ -461,7 +476,7 @@ footer ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:28px}
     <li>LAAD Defence &amp; Security 2027</li>
     <li>Airbnb: anúncios da Barra Olímpica, coleta em 28/10/2026</li>
     <li>Dicas de Viagem: hotéis perto do Rock in Rio 2026</li>
-    <li>Invexo e material de lançamento: On Resort</li>
+    <li>onresort.com.br: dados oficiais do On Resort</li>
     <li>Mercado &amp; Consumo e Jornal de Brasília: ocupação hoteleira</li>
   </ul>
 </div></footer>
@@ -587,16 +602,16 @@ document.querySelectorAll(".count").forEach(countUp);
       const x = p.x * w, y = p.y * h;
       if (!p.home) {
         ctx.beginPath(); ctx.moveTo(home.x * w, home.y * h); ctx.lineTo(x, y);
-        ctx.strokeStyle = "rgba(217,169,74,.18)"; ctx.setLineDash([3, 5]); ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+        ctx.strokeStyle = "rgba(216,180,138,.18)"; ctx.setLineDash([3, 5]); ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
         for (let k = 0; k < 3; k++) {
           const ph = ((t / 2800) + k / 3 + i * .19) % 1;
           ctx.beginPath(); ctx.arc(x, y, 8 + ph * (narrow ? 60 : 110), 0, 7);
-          ctx.strokeStyle = `rgba(217,169,74,${(1 - ph) * .5})`; ctx.lineWidth = 1.5; ctx.stroke();
+          ctx.strokeStyle = `rgba(216,180,138,${(1 - ph) * .5})`; ctx.lineWidth = 1.5; ctx.stroke();
         }
       }
       ctx.beginPath(); ctx.arc(x, y, p.home ? 7 : 4.5, 0, 7);
-      ctx.fillStyle = p.home ? "#FFFFFF" : "#D9A94A"; ctx.fill();
-      if (!narrow) { ctx.font = `${p.home ? 600 : 500} 13px Poppins, sans-serif`; ctx.fillStyle = "rgba(238,243,238,.88)"; ctx.fillText(p.l, x + 11, y + 4); }
+      ctx.fillStyle = p.home ? "#FFFFFF" : "#D8B48A"; ctx.fill();
+      if (!narrow) { ctx.font = `${p.home ? 600 : 500} 13px Albert Sans, sans-serif`; ctx.fillStyle = "rgba(246,238,228,.88)"; ctx.fillText(p.l, x + 11, y + 4); }
     });
     if (!reduce) requestAnimationFrame(draw);
   };
@@ -663,7 +678,7 @@ function theme() {
            purple:css("--purple"), soft:css("--soft"), cost:css("--cost"), surface:css("--surface") };
 }
 function base(T) {
-  Chart.defaults.font.family = "Poppins, system-ui, sans-serif";
+  Chart.defaults.font.family = "Albert Sans, system-ui, sans-serif";
   Chart.defaults.font.size = narrow ? 13 : 15;
   Chart.defaults.color = T.muted;
   if (reduce) Chart.defaults.animation = false; else { Chart.defaults.animation.duration = 1300; Chart.defaults.animation.easing = "easeOutQuart"; }
@@ -676,7 +691,7 @@ function base(T) {
 }
 const valueLabels = { id:"vl", afterDatasetsDraw(ch, _a, o) {
   if (!o || !o.fmt) return;
-  const { ctx } = ch; ctx.save(); ctx.font = `600 ${narrow ? 12 : 14}px Poppins, sans-serif`; ctx.fillStyle = o.color;
+  const { ctx } = ch; ctx.save(); ctx.font = `600 ${narrow ? 12 : 14}px Albert Sans, sans-serif`; ctx.fillStyle = o.color;
   ch.data.datasets.forEach((ds, di) => { if (o.only != null && o.only !== di) return;
     ch.getDatasetMeta(di).data.forEach((b, i) => {
       const v = ds.data[i]; if (v == null) return;
@@ -722,8 +737,8 @@ function build() {
   donut("dRir", 49); donut("dRog", 44);
 
   charts.push(new Chart($("cOcup"), { type: "bar",
-    data: { labels: ["Carnaval 2026", "Réveillon 25/26", "Rock in Rio 2024", "Rock in Rio 2026*"],
-      datasets: [{ data: [99.02, 90.58, 88, 77.6], backgroundColor: [T.gold, T.gold, T.green, T.green], borderRadius: 6 }] },
+    data: { labels: ["Carnaval 2026", "Réveillon 25/26", "Rock in Rio 2024", "Rock in Rio 2026"],
+      datasets: [{ data: [99.02, 90.58, 88, 85.79], backgroundColor: [T.gold, T.gold, T.green, T.green], borderRadius: 6 }] },
     options: { maintainAspectRatio: false, plugins: { legend: { display: false }, vl: { fmt: v => fmt(v, 1) + "%", color: T.fg } },
       scales: { y: { min: 0, max: 110, grid, ticks: { callback: v => v <= 100 ? v + "%" : "" } }, x: { grid: noGrid, ticks: { color: T.fg, maxRotation: 0, autoSkip: false, font: { size: narrow ? 11 : 14 } } } } },
     plugins: [valueLabels] }));
